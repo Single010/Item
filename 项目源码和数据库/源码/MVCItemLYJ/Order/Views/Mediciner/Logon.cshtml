@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Logon";
+    Layout = "~/Views/Shared/Mlogon_PartialPage1.cshtml";
+}
+
+<style type="text/css">
+    .form-group label {
+        border: 1px solid #BABDB6;
+        border-radius: 5px 0 0 5px;
+        width: 40px;
+        height: 34px;
+        margin-top: -1px;
+        margin-right: -15px;
+        color: #BABDB6;
+    }
+
+    .form-group {
+        width: 90%;
+        margin-top: 25px;
+        /*border:1px solid red;*/
+    }
+
+    .col-md-10 input {
+        border-left: none;
+        border-radius: 0 5px 5px 0;
+    }
+
+    .btn input {
+        border-radius: 5px 5px;
+        border: 1px solid #5CB85C;
+        background-color: #5CB85C;
+        color: white;
+        width: 150px;
+        height: 50px;
+        line-height: 50px;
+        margin-left: -190px;
+        margin-top: -50px;
+        outline: none;
+    }
+</style>
+
+<form action="/Mediciner/Logon" method="post">
+    <div class="form-horizontal" style="width: 55%; margin-left: 250px; ">
+        <hr />
+        <div class="form-group">
+            <label class="control-label col-md-2 glyphicon glyphicon-user" for="Mloginname"></label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-required="登录名是必填项" id="Mloginname" name="Mloginname" type="text" value="" />
+                @Html.ValidationMessage("Mloginname")
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2 glyphicon glyphicon-lock" for="Mpwd"></label>
+            <div class="col-md-10">
+                <input class="form-control" data-val="true" data-val-required="密码是必填项" id="Mpwd" name="Mpwd" type="password" />
+                @Html.ValidationMessage("Mpwd")
+            </div>
+        </div>
+        @ViewBag.Erro
+        <div class="form-group btn">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value=" 登录 " />
+            </div>
+        </div>
+    </div>
+</form>
+
+

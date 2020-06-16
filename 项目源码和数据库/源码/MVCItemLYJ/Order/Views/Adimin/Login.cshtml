@@ -1,0 +1,224 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <style type="text/css">
+        .pic {
+            background-image: url('../../Content/Images/医用工具图片_彼岸图网.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .logon {
+            width: 800px;
+            height: 400px;
+            background-color: white;
+            text-align: center;
+            margin: auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+            .logon .text {
+                display: block;
+                font-size: 30px;
+                color: #BCBCBC;
+                margin-top: 20px;
+            }
+
+            .logon .form {
+                margin-top: 10px;
+                width: auto;
+                height: 250px;
+                border-top: 1px solid #BCBCBC;
+                border-bottom: 1px solid #BCBCBC;
+            }
+
+        .group {
+            /*border:1px solid red;*/
+            height: 80px;
+            display: flex;
+            flex-flow: row nowrap;
+        }
+
+        .logon .form .input {
+            /*border: 1px solid red;*/
+            height: 80px;
+            line-height: 80px;
+            width: 45%;
+            display: flex;
+            flex-flow: row nowrap;
+            margin: 10px 40px;
+            position: relative;
+        }
+
+            .logon .form .input label {
+                height: 35px;
+                line-height: 35px;
+                border: 1px solid #BCBCBC;
+            }
+
+            .logon .form .input label, .logon .form .input .form-control {
+                flex-shrink: 1;
+                flex-grow: 1;
+            }
+
+        .btn {
+            width: 40%;
+            height: 40px;
+        }
+
+        .erro {
+            position: absolute;
+            left: 40px;
+            top: 5px;
+        }
+
+        #text {
+            margin-left: -30px;
+            margin-top: 50px;
+        }
+
+        .posts-nav-wrap {
+            position: absolute;
+            top: 650px;
+            left: 45%;
+        }
+
+            .posts-nav-wrap ul {
+                border-radius: 10px 10px;
+                list-style: none;
+                display: block;
+                border: none;
+                background-color: #999999;
+                width: 150px;
+                height: 50px;
+                line-height: 40px;
+                text-align: center;
+            }
+
+                .posts-nav-wrap ul:hover {
+                    background-color: #FEF104;
+                }
+
+                    .posts-nav-wrap ul:hover a {
+                        text-decoration: none;
+                        color: black;
+                        margin-left: -45px;
+                    }
+
+        .next {
+            font-size: 36px;
+            color: black;
+        }
+
+
+        .form-group label{
+        border:1px solid #BABDB6;
+        border-radius:5px 0 0 5px;
+        width:40px;
+        height:34px;
+        margin-top:-1px;
+        margin-right:-15px;
+        color:#BABDB6;
+    }
+    .form-group{
+        width:90%;
+        margin-top:25px;
+        /*border:1px solid red;*/
+    }
+    .col-md-10 input {
+        border-left: none;
+        border-radius: 0 5px 5px 0;
+    }
+    .btn input{
+        border-radius:5px 5px;
+        border:1px solid #5CB85C;
+        background-color:#5CB85C;
+        color:white;
+        width:150px;
+        height:50px;
+        line-height:50px;
+        margin-left:-190px;
+        margin-top:-50px;
+        outline: none;
+
+    }
+
+    </style>
+</head>
+<body style="margin: 0px; padding: 0px;">
+    <div style="position:relative;">
+
+        <div class="pic" style="
+        width: auto;
+        height: 800px;
+">
+
+            <div class="logon">
+                <div style="        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center">
+                    <span class="text"><a href="">欢迎登录</a></span>
+                </div>
+                <div class="form">
+
+                    <form action="/Adimin/Login" method="post">
+                        <div class="form-horizontal" style="width: 55%; margin-left: 250px; ">
+                            <hr />
+                            <div class="form-group">
+                                <label class="control-label col-md-2 glyphicon glyphicon-user" for="Aloginname"></label>
+                                <div class="col-md-10">
+                                    <input class="form-control text-box single-line" data-val="true" data-val-required="登录名是必填项" id="Aloginname" name="Aloginname" type="text" value="" />
+                                    @Html.ValidationMessage("Aloginname")
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2 glyphicon glyphicon-lock" for="Apwd"></label>
+                                <div class="col-md-10">
+                                    <input class="form-control" data-val="true" data-val-required="密码是必填项" id="Apwd" name="Apwd" type="password" />
+                                    @Html.ValidationMessage("Apwd")
+                                </div>
+                            </div>
+                            @ViewBag.Erro
+                            <div class="form-group btn">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value=" 登录 " />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="posts-nav-wrap">
+            <ul class="posts-nav">
+                <li class='next'><a href="/Frist/Main" class='next'>←</a></li>
+            </ul>
+        </div>
+
+        <script src="~/Scripts/logon.js"></script>
+
+    </div>
+</body>
+</html>
+
+

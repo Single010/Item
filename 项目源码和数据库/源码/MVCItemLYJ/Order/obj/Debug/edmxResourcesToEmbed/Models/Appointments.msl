@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AppointmentsModelStoreContainer" CdmEntityContainer="AppointmentsEntities">
+    <EntitySetMapping Name="Adimin">
+      <EntityTypeMapping TypeName="AppointmentsModel.Adimin">
+        <MappingFragment StoreEntitySet="Adimin">
+          <ScalarProperty Name="Aid" ColumnName="Aid" />
+          <ScalarProperty Name="Aloginname" ColumnName="Aloginname" />
+          <ScalarProperty Name="Apwd" ColumnName="Apwd" />
+          <ScalarProperty Name="ANmae" ColumnName="ANmae" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appointment">
+      <EntityTypeMapping TypeName="AppointmentsModel.Appointment">
+        <MappingFragment StoreEntitySet="Appointment">
+          <ScalarProperty Name="Aid" ColumnName="Aid" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Mid" ColumnName="Mid" />
+          <ScalarProperty Name="Atime" ColumnName="Atime" />
+          <ScalarProperty Name="Ttime" ColumnName="Ttime" />
+          <ScalarProperty Name="Astate" ColumnName="Astate" />
+          <ScalarProperty Name="Anun" ColumnName="Anun" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comment">
+      <EntityTypeMapping TypeName="AppointmentsModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="Cid" ColumnName="Cid" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Mid" ColumnName="Mid" />
+          <ScalarProperty Name="Aid" ColumnName="Aid" />
+          <ScalarProperty Name="Ctime" ColumnName="Ctime" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Cstate" ColumnName="Cstate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dept">
+      <EntityTypeMapping TypeName="AppointmentsModel.Dept">
+        <MappingFragment StoreEntitySet="Dept">
+          <ScalarProperty Name="Did" ColumnName="Did" />
+          <ScalarProperty Name="Dname" ColumnName="Dname" />
+          <ScalarProperty Name="Dspec" ColumnName="Dspec" />
+          <ScalarProperty Name="Pdid" ColumnName="Pdid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hospital">
+      <EntityTypeMapping TypeName="AppointmentsModel.Hospital">
+        <MappingFragment StoreEntitySet="Hospital">
+          <ScalarProperty Name="Hid" ColumnName="Hid" />
+          <ScalarProperty Name="Hname" ColumnName="Hname" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="HImage" ColumnName="HImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mediciner">
+      <EntityTypeMapping TypeName="AppointmentsModel.Mediciner">
+        <MappingFragment StoreEntitySet="Mediciner">
+          <ScalarProperty Name="Mid" ColumnName="Mid" />
+          <ScalarProperty Name="Mloginname" ColumnName="Mloginname" />
+          <ScalarProperty Name="Mpwd" ColumnName="Mpwd" />
+          <ScalarProperty Name="Mname" ColumnName="Mname" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Titles" ColumnName="Titles" />
+          <ScalarProperty Name="Mspec" ColumnName="Mspec" />
+          <ScalarProperty Name="MtimeA" ColumnName="MtimeA" />
+          <ScalarProperty Name="MtimeB" ColumnName="MtimeB" />
+          <ScalarProperty Name="MtimeC" ColumnName="MtimeC" />
+          <ScalarProperty Name="Mcount" ColumnName="Mcount" />
+          <ScalarProperty Name="Hid" ColumnName="Hid" />
+          <ScalarProperty Name="Did" ColumnName="Did" />
+          <ScalarProperty Name="MPic" ColumnName="MPic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Question">
+      <EntityTypeMapping TypeName="AppointmentsModel.Question">
+        <MappingFragment StoreEntitySet="Question">
+          <ScalarProperty Name="Qid" ColumnName="Qid" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Mid" ColumnName="Mid" />
+          <ScalarProperty Name="Qtime" ColumnName="Qtime" />
+          <ScalarProperty Name="Qcontent" ColumnName="Qcontent" />
+          <ScalarProperty Name="Qanswer" ColumnName="Qanswer" />
+          <ScalarProperty Name="Qstate" ColumnName="Qstate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="AppointmentsModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Uloginname" ColumnName="Uloginname" />
+          <ScalarProperty Name="Upwd" ColumnName="Upwd" />
+          <ScalarProperty Name="Uname" ColumnName="Uname" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Uidentity" ColumnName="Uidentity" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,161 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <style type="text/css">
+        .pic {
+            background-image: url('../../Content/Images/拿着听诊器的医生图片_彼岸图网.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .logon {
+            width: 800px;
+            height: 400px;
+            background-color: white;
+            text-align: center;
+            margin: auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+            .logon .text {
+                display: block;
+                font-size: 30px;
+                color: #BCBCBC;
+                margin-top: 20px;
+            }
+
+            .logon .form {
+                margin-top: 10px;
+                width: auto;
+                height: 250px;
+                border-top: 1px solid #BCBCBC;
+                border-bottom: 1px solid #BCBCBC;
+            }
+
+        .group {
+            /*border:1px solid red;*/
+            height: 65px;
+            display: flex;
+            flex-flow: row nowrap;
+        }
+
+        .logon .form .input {
+            /*border: 1px solid red;*/
+            height: 65px;
+            line-height: 65px;
+            width: 45%;
+            display: flex;
+            flex-flow: row nowrap;
+            margin: 10px 40px;
+            position: relative;
+        }
+
+            .logon .form .input label {
+                height: 35px;
+                line-height: 35px;
+                border: 1px solid #BCBCBC;
+            }
+
+            .logon .form .input label, .logon .form .input .form-control {
+                flex-shrink: 1;
+                flex-grow: 1;
+            }
+
+        .btn {
+            width: 40%;
+            height: 40px;
+        }
+
+        .erro {
+            height: 30px;
+            line-height: 30px;
+            color: red;
+            position: absolute;
+            left: 40px;
+            top: 35px;
+        }
+
+        #text {
+            margin-left: -30px;
+            margin-top: 20px;
+        }
+        /*滑块*/
+         .posts-nav-wrap{
+            position:absolute;
+            top:650px;
+            left:45%;
+        }
+        .posts-nav-wrap ul{
+            border-radius:10px 10px;
+            list-style:none;
+            display:block;
+            border:none;
+            background-color:#999999;
+            width:150px;
+            height:50px;
+            line-height:40px;
+            text-align:center;
+        }
+        .posts-nav-wrap ul:hover{
+            background-color:#FEF104;
+        }
+         .posts-nav-wrap ul:hover a{
+             text-decoration:none;
+              color:black;
+              margin-left:-45px;
+        }
+        .next{
+            font-size:36px;
+            color:black;
+        }
+    </style>
+</head>
+<body style="margin:0px;padding:0px;">
+    <div  style="position:relative;">
+        <div class="pic" style="width: auto;height: 800px;">
+
+            <div class="logon">
+                <div style="display:flex;flex-flow:row nowrap;justify-content:center">
+                    <span class="text" style="margin-right:100px;"><a href="/Mediciner/Create">注册</a></span>
+                    <span class="text"><a href="/Mediciner/Logon">登录</a></span>
+                </div>
+                <div class="form">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+        <div class="posts-nav-wrap">
+            <ul class="posts-nav">
+                <li class='next'><a href="/Frist/Main" class='next'>←</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+@section scripts{
+    <script type="text/javascript">
+        //$(function () {
+        //    $(".erro").html("")
+        //})
+        $(".form-control").click(function () {
+            $(this).siblings(".erro").html("")
+        })
+    </script>
+
+}

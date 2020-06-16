@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @using Order.Models;
+    @{
+        User user = Session["user"] as User;
+    }
+    <link href="~/Content/hand.css" rel="stylesheet" />
+</head>
+<body style="margin:0px;padding:0px">
+
+    @*灰色登录条*@
+    <div class="gh-nav">
+        <div class="container g-clear">
+            <div class="g-left" id="">
+                <span class="text">@*@user.Uname*@ xx您好！</span>
+                <a href="/Mediciner/Logout">退出</a>
+            </div>
+
+
+            <div class="g-right">
+
+                <a href="text">
+                    下载APP
+                    <span>
+                        <img src="https://static.guahao.cn/front/portal-pc-static/img/index-appQRcode.png?v=20170505" alt="" style="display: none;">
+                    </span>
+                </a>
+                <span class="line">|</span>
+                <a href="">快速取消预约</a>
+                <span class="line">|</span>
+                <a href="">客服中心</a>
+                <span class="line">|</span>
+                <a href="">微医云</a>
+                <span class="line">|</span>
+                <a href="">药品信息</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="gh-main">
+        <div class="container g-clear1" style="width: 1230px">
+            <div class="gh-logo ">
+                <img src="~/Content/Images/标志.jpg" alt="微医" class="wy-logo" />
+            </div>
+            <div class="gh-search gh-web-search gh-search-left ">
+                <form class="gh-search-form" action="" name="qform">
+                    <span class="glyphicon glyphicon-search" style=" width: 90%; height: 30px; line-height: 30px;">
+                        <span class="search-icon"></span>
+                        <input type="text" name="q" value="" autocomplete="off" maxlength="50" class="J_SearchQ" placeholder="请输入医院名" style="width:90%; border:none;outline:none" />
+                    </span>
+                    <input type="submit" value="搜索" class="gbn gbt-green2" style="height:34px;width:50px;background-color:#6EB92C;border:none;outline:none;color:white;font-size:16px;" />
+                    <div class="clear"></div>
+                </form>
+            </div>
+            <span class="gh-search-tips">
+                <img src="~/Content/Images/品台.jpg" />
+            </span>
+        </div>
+    </div>
+    <div class="navigation">
+        <div class="home-menu-ctn">
+            <ul class="main-menu-nav">
+                <li><a href="/Users/MyOrder">我的预约</a></li>
+                <li><a href="">我的评论</a></li>
+                <li><a href="">我的问诊</a></li>
+                <li><a href="">我的信息</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div id="content">
+        <!--页面内容部分-->
+        @RenderBody()
+
+
+        <!--页脚-->
+        <div id="footer">
+            <div id="button">
+                <ul>
+                    <li><a href="#">服务条款</a></li>
+                    <li>丨</li>
+                    <li><a href="#">隐私政策</a></li>
+                    <li>丨</li>
+                    <li><a href="#">儿童政策</a></li>
+                    <li>丨</li>
+                    <li><a href="#">意见反馈</a></li>
+                    <li>丨</li>
+                    <li><a href="#">投诉</a></li>
+                </ul>
+                <div class="number">快医公司版权所有©199X-20X9XXXX科技有限公司运营：浙网文[20XX]3X0X-X6X号</div>
+                <div class="report">违法和不良信息举报电话：0xx1-xx3xx5x6 举报邮箱：1373xxxxxx@qq.com </div>
+            </div>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

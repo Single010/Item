@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/heightlength.css">
+    <link rel="stylesheet" href="../css/mxjs.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+@using Order.Models;
+@model Hospital
+@{  
+    Hospital hos = ViewBag.hos;
+}
+<body style="background-color:#252C35;">
+
+    <div class="container">
+        <div class="jsbg">
+            <ul class="breadcrumb">
+                <li><a href="#">医院管理</a></li>
+                <li><a href="#">修改信息</a></li>
+            </ul>
+            <div class="col-lg-12 mxlength" style="border:5px dashed #516877;background-color:#23241F;height:600px;position:relative;">
+                <div style="margin:0 auto;border:1px solid gray;width:60%;height:300px; background-color:white;margin-top:170px;border-radius:10px 10px">
+                    <h2 style="margin-left:30%;">医院信息修改</h2>
+                    <form action="/Adimin/EditHos/" method="post" id="form2" enctype="multipart/form-data" style="position:relative">
+                        <div style="float:left;margin-left:15px;">
+                            <div class="form-group">
+                                @Html.Hidden("Hid")
+                                <label for="Hname" class="col-form-label">名称:</label>
+                                <input type="text" class="form-control" id="Hname" name="Hname" value="@hos.Hname">
+                            </div>
+                            <div class="form-group">
+                                <label for="Address" class="col-form-label">地址:</label>
+                                <input type="text" class="form-control" id="Address" name="Address" value="@hos.Address">
+                            </div>
+                        </div>
+                        <div style="float:right;margin-right:15px;">
+                            <div class="form-group">
+                                <label for="Grade" class="col-form-label">级别:</label>
+                                <input type="text" class="form-control" id="Grade" name="Grade" value="@hos.Grade">
+                            </div>
+                            <div class="form-group">
+                                <label for="HImage">照片:</label>
+                                <input type="file" name="file" id="file" class="form-control" />
+                                <input type="hidden" name="Photo" value="@hos.HImage" />
+                            </div>
+                        </div>
+                        <input type="submit" value="修改" class="btn btn-success" style="position:absolute;top:170px;left:45%" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+    <script src="../js/smoothscroll.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../js/mking.js"></script>
+</body>
+</html>

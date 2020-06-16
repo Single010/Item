@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AppointmentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Adimin">
+    <Key>
+      <PropertyRef Name="Aid" />
+    </Key>
+    <Property Name="Aid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Aloginname" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Apwd" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ANmae" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="Aid" />
+    </Key>
+    <Property Name="Aid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="Mid" Type="int" Nullable="false" />
+    <Property Name="Atime" Type="datetime" Nullable="false" />
+    <Property Name="Ttime" Type="datetime" Nullable="false" />
+    <Property Name="Astate" Type="int" Nullable="false" />
+    <Property Name="Anun" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="Cid" />
+    </Key>
+    <Property Name="Cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="Mid" Type="int" Nullable="false" />
+    <Property Name="Aid" Type="int" Nullable="false" />
+    <Property Name="Ctime" Type="datetime" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Cstate" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dept">
+    <Key>
+      <PropertyRef Name="Did" />
+    </Key>
+    <Property Name="Did" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Dspec" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Pdid" Type="int" />
+  </EntityType>
+  <EntityType Name="Hospital">
+    <Key>
+      <PropertyRef Name="Hid" />
+    </Key>
+    <Property Name="Hid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Hname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="HImage" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Mediciner">
+    <Key>
+      <PropertyRef Name="Mid" />
+    </Key>
+    <Property Name="Mid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Mloginname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Mpwd" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Mname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Titles" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Mspec" Type="nvarchar" MaxLength="100" />
+    <Property Name="MtimeA" Type="datetime" />
+    <Property Name="MtimeB" Type="datetime" />
+    <Property Name="MtimeC" Type="datetime" />
+    <Property Name="Mcount" Type="int" Nullable="false" />
+    <Property Name="Hid" Type="int" Nullable="false" />
+    <Property Name="Did" Type="int" Nullable="false" />
+    <Property Name="MPic" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="Qid" />
+    </Key>
+    <Property Name="Qid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uid" Type="int" Nullable="false" />
+    <Property Name="Mid" Type="int" Nullable="false" />
+    <Property Name="Qtime" Type="datetime" Nullable="false" />
+    <Property Name="Qcontent" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Qanswer" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Qstate" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Uloginname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Upwd" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Uname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Uidentity" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Appointment_Mediciner">
+    <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="1" />
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mediciner">
+        <PropertyRef Name="Mid" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Mid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Appointment_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Appointment">
+    <End Role="Appointment" Type="Self.Appointment" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Appointment">
+        <PropertyRef Name="Aid" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Aid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Mediciner">
+    <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mediciner">
+        <PropertyRef Name="Mid" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Mid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dept_Dept1">
+    <End Role="Dept" Type="Self.Dept" Multiplicity="0..1" />
+    <End Role="Dept1" Type="Self.Dept" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="Did" />
+      </Principal>
+      <Dependent Role="Dept1">
+        <PropertyRef Name="Pdid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mediciner_Dept">
+    <End Role="Dept" Type="Self.Dept" Multiplicity="1" />
+    <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="Did" />
+      </Principal>
+      <Dependent Role="Mediciner">
+        <PropertyRef Name="Did" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mediciner_Hospital">
+    <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+    <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospital">
+        <PropertyRef Name="Hid" />
+      </Principal>
+      <Dependent Role="Mediciner">
+        <PropertyRef Name="Hid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Question_Mediciner">
+    <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mediciner">
+        <PropertyRef Name="Mid" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="Mid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Question_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AppointmentsModelStoreContainer">
+    <EntitySet Name="Adimin" EntityType="Self.Adimin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dept" EntityType="Self.Dept" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mediciner" EntityType="Self.Mediciner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Appointment_Mediciner" Association="Self.FK_Appointment_Mediciner">
+      <End Role="Mediciner" EntitySet="Mediciner" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Appointment_User" Association="Self.FK_Appointment_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Appointment" EntitySet="Appointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Appointment" Association="Self.FK_Comment_Appointment">
+      <End Role="Appointment" EntitySet="Appointment" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Mediciner" Association="Self.FK_Comment_Mediciner">
+      <End Role="Mediciner" EntitySet="Mediciner" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dept_Dept1" Association="Self.FK_Dept_Dept1">
+      <End Role="Dept" EntitySet="Dept" />
+      <End Role="Dept1" EntitySet="Dept" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mediciner_Dept" Association="Self.FK_Mediciner_Dept">
+      <End Role="Dept" EntitySet="Dept" />
+      <End Role="Mediciner" EntitySet="Mediciner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mediciner_Hospital" Association="Self.FK_Mediciner_Hospital">
+      <End Role="Hospital" EntitySet="Hospital" />
+      <End Role="Mediciner" EntitySet="Mediciner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Question_Mediciner" Association="Self.FK_Question_Mediciner">
+      <End Role="Mediciner" EntitySet="Mediciner" />
+      <End Role="Question" EntitySet="Question" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Question_User" Association="Self.FK_Question_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Question" EntitySet="Question" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

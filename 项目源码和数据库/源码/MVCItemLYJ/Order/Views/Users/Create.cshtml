@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/Login_PartialPage1.cshtml";
+}
+
+@using (@Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+    <div class="group">
+        @*姓名*@
+        <div class="input">
+            <label for="Uloginname">账号:</label>
+            @Html.TextBox("Uloginname", null, new { @class = "form-control", placeholder = "请输入账号", onfocus = "check()" })
+            <div class="erro" style="height:30px; color:red;">
+                @Html.ValidationMessage("Uloginname")
+                @Html.ValidationMessage("flag")
+            </div>
+        </div>
+
+
+
+        @*密码*@
+        <div class="input">
+            <label for="Upwd">密码:</label>
+            @Html.TextBox("Upwd", null, new { @class = "form-control", placeholder = "请输入密码", onfocus = "check()" })
+            <div class="erro" style="height:30px; color:red;">
+                @Html.ValidationMessage("Upwd")
+            </div>
+        </div>
+
+    </div>
+
+    <div class="group">
+        @*姓名*@
+        <div class="input">
+            <label for="Uname">姓名:</label>
+            @Html.TextBox("Uname", null, new { @class = "form-control", placeholder = "请输入账号", onfocus = "check()" })
+            <div class="erro" style="height:30px; color:red;">
+                @Html.ValidationMessage("Uname")
+            </div>
+        </div>
+        @*性别*@
+        <div class="input">
+            <label for="Gender">性别:</label><br />
+            <select name="Gender" id="Gender" class="form-control">
+                <option value="男" selected>男</option>
+                <option value="女">女</option>
+            </select>
+            @*<div class="erro" style="height:30px; color:red;">
+                    @Html.ValidationMessage("Gender")
+                </div>*@
+        </div>
+    </div>
+
+    <div class="group">
+        @*身份证*@
+        <div class="input">
+            <label for="Uidentity" class="glyphicon glyphicon-user">:</label>
+            @Html.TextBox("Uidentity", null, new { @class = "form-control", placeholder = "请输入身份证证件号", onfocus = "check()" })
+            <div class="erro" style="height:30px; color:red;">
+                @Html.ValidationMessage("Uidentity")
+            </div>
+        </div>
+        @*手机号*@
+        <div class="input">
+            <label for="Mobile" class="glyphicon glyphicon-phone">:</label>
+            @Html.TextBox("Mobile", null, new { @class = "form-control", placeholder = "请输入手机号", onfocus = "check()" })
+            <div class="erro" style="height:30px; color:red;">
+                @Html.ValidationMessage("Mobile")
+            </div>
+        </div>
+    </div>
+
+
+    <input type="text" value="" placeholder="请输入验证码（区分大小写）" style="height:30px;position: relative; top:-15px; font-size:20px;" id="text">
+    <canvas id="canvas" width="100" height="43" onclick="dj()"
+            style="border: 1px solid #ccc;
+        border-radius: 5px;"></canvas>
+
+    <input type="hidden" value="" class="numflag" name="num" />
+
+    <div class="btn" style="margin-top:-50px;">
+        <input type="submit" value="注册" class="btn btn-success" onclick="sublim()" />
+    </div>
+
+
+}

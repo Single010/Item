@@ -1,0 +1,110 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.gh-nav {
+    width: auto;
+    border: 1px solid #F1ECEC;
+    background-color: #F5F5F5;
+}
+
+.container {
+    width: 80%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 12px;
+}
+
+.g-left {
+    flex-grow: 1;
+    flex-shrink: 1;
+    /*border: 1px solid black;*/
+}
+
+.g-right {
+    margin-left: 400px;
+    flex-grow: 3;
+    flex-shrink: 1;
+    /*border:1px solid black;*/
+}
+
+    .g-left a, .g-right a {
+        margin-left: 10px;
+        margin-right: 10px;
+        color: black;
+        text-decoration: none;
+    }
+/*这是搜索行*/
+.gh-main {
+    width: auto;
+    height: 122px;
+    /*border: 1px solid red;*/
+}
+
+.g-clear1 {
+    width: 80%;
+    height: 122px;
+    line-height: 122px;
+    /*border: 1px solid red;*/
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+
+.gh-search {
+    border: 3px solid #6EB92C;
+    width: 497px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 40px;
+    margin-left: 150px;
+}
+
+.gh-search-tips {
+    flex-shrink: 1;
+    flex-grow: 3;
+}
+
+.gh-search-form {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+/*我是底部*/
+#button {
+    width: 100%;
+    height: 150px;
+    background-color: #F5F5F5;
+    border-top: 1px solid darkgray;
+}
+
+    #button ul {
+        width: 30%;
+        margin: 20px auto;
+        list-style: none;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+    }
+
+        #button ul li {
+            flex-shrink: 1;
+            flex-grow: 1;
+            color: darkgray;
+            font-size: 12px;
+        }
+
+            #button ul li a {
+                color: darkgray;
+            }
+
+.number, .report {
+    margin: 10px auto;
+    text-align: center;
+    font-size: 12px;
+}

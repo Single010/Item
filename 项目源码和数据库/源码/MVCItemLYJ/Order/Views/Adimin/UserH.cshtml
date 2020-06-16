@@ -1,0 +1,135 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/heightlength.css">
+    <link rel="stylesheet" href="../css/mxjs.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+@using Order.Models;
+@model List<User>
+<body style="background-color:#252C35;">
+
+    <div class="container">
+        <div class="jsbg">
+            <ul class="breadcrumb">
+                <li><a href="#">人员管理</a></li>
+                <li><a href="#">用户管理</a></li>
+            </ul>
+            <div class="col-lg-12 mxlength" style="border:5px dashed #516877;background-color:#23241F;height:600px;position:relative;">
+
+                <div style="margin-top:15px;display:flex;width:500px;">
+                    <form class="form-inline" action="" method="post">
+                        <label for="ANmae" style="color:white;">姓名：</label>
+                        <input type="text" name="Nmae" id="Nmae" class="form-control" placeholder="请输入姓名" />
+                        <input type="submit" value="查询" class="btn btn-success" />
+                    </form>
+                    <a href="~/Adimin/UserH/" class="btn btn-warning" style="margin-left:20px;">刷新</a>
+                </div>
+
+                <table class="table table-bordered table-hover" style="background-color: white; margin-top: 20px;">
+                    <thead class="bg-success text-white">
+                        <tr>
+                            <th>编号</th>
+                            <th>登录账号</th>
+                            <th>登录名</th>
+                            <th>性别</th>
+                            <th>身份证号</th>
+                            <th>手机号</th>
+                            @*<th>修改</th>*@
+                            <th>删除</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Uid</td>
+                            <td>@item.Uloginname</td>
+                            <td>@item.Uname</td>
+                            <td>@item.Gender</td>
+                            <td>@item.Uidentity</td>
+                            <td>@item.Mobile</td>
+                            @*<td><a href="/Department/Edit/@item.Uid" class="btn btn-info">修改</a></td>*@
+                            <td><a href="/Department/Delete/@item.Uid" class="btn btn-danger" onclick="return confirm('您确定要删除 @item.Uname 的信息吗？')">删除</a></td>
+                        </tr>
+                    }
+                </table>
+                @*分页*@
+                <div style="position:absolute;top:500px;height:auto;width:1100px;">
+                    <div classs="row">
+                        <div class="col-lg-8">
+                            <label style="color:white;">总共 @ViewBag.totalCount 行</label>
+                            <select onchange="window.location = this.value;">
+                                @{
+                                    int[] count = new[] { 2, 4, 6, 8, 10 };
+                                }
+                                @foreach (var item in count)
+                                {
+                                    if (item.Equals(ViewBag.pageCount))
+                                    {
+                                        <option value="/Adimin/UserH?pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="/Adimin/UserH?pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+                        <div class="col-lg-4">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="/Adimin/UserH?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a></li>
+
+                                    @if (@ViewBag.pageIndex > 1)
+                                    {
+                                        <li class="page-item"><a class="page-link" href="/Adimin/UserH?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+                                    }
+
+                                    <li class="page-item"><a class="page-link" href="#">@ViewBag.pageIndex</a></li>
+
+                                    @if (@ViewBag.pageIndex < @ViewBag.totalPage)
+                                    {
+                                        <li class="page-item"><a class="page-link" href="/Adimin/UserH?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
+                                    }
+
+                                    <li class="page-item"><a class="page-link" href="/Adimin/UserH?pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>@*分页尾*@
+
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+    <script src="../js/smoothscroll.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../js/mking.js"></script>
+</body>
+</html>

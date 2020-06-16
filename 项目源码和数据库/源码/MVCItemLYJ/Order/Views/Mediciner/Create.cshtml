@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/Mlogon_PartialPage1.cshtml";
+}
+@using Order.Models;
+@model List<Dept>
+
+@{
+    List<Hospital> hos = ViewBag.hos;
+}
+@using (@Html.BeginForm("Create", "Mediciner", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+
+    <div class="group">
+        @*账号*@
+        <div class="input">
+            <label for="Mloginname">账号:</label>
+            @Html.TextBox("Mloginname", null, new { @class = "form-control", placeholder = "请输入账号", onfocus = "check()" })
+            <div class="erro">
+                @Html.ValidationMessage("Mloginname")
+            </div>
+        </div>
+
+
+
+        @*密码*@
+        <div class="input">
+            <label for="Mpwd">密码:</label>
+            @Html.Password("Mpwd", null, new { @class = "form-control", placeholder = "请输入密码", onfocus = "check()" })
+            <div class="erro">
+                @Html.ValidationMessage("Mpwd")
+            </div>
+        </div>
+
+    </div>
+
+    <div class="group">
+        @*姓名*@
+        <div class="input">
+            <label for="Mname">姓名:</label>
+            @Html.TextBox("Mname", null, new { @class = "form-control", placeholder = "请输入账号姓名", onfocus = "check()" })
+            <div class="erro">
+                @Html.ValidationMessage("Mname")
+            </div>
+        </div>
+        @*性别*@
+        <div class="input">
+            <label for="Gender">性别:</label><br />
+            <select name="Gender" id="Gender" class="form-control">
+                <option value="男" selected>男</option>
+                <option value="女">女</option>
+            </select>
+            @*<div class="erro" style="height:30px; color:red;">
+                    @Html.ValidationMessage("Gender")
+                </div>*@
+        </div>
+    </div>
+
+    <div class="group">
+        @*职称*@
+        <div class="input">
+            <label for="Titles">职称:</label>
+            @Html.TextBox("Titles", null, new { @class = "form-control", placeholder = "请输入身份职称", onfocus = "check()" })
+            <div class="erro" style="height:30px; color:red;">
+                @Html.ValidationMessage("Titles")
+            </div>
+        </div>
+        @*介绍*@
+        <div class="input">
+            <label for="Mspec">介绍:</label>
+            @Html.TextBox("Mspec", null, new { @class = "form-control", placeholder = "请输入介绍", onfocus = "check()" })
+            <div class="erro" style="height:30px; color:red;">
+                @Html.ValidationMessage("Mspec")
+            </div>
+        </div>
+    </div>
+
+
+    <div class="group">
+        @*所属医院*@
+        <div class="input">
+            <label for="Hid">医院:</label>
+            <select name="Hid" id="Hid" class="form-control">
+                @foreach (var item in hos)
+                {
+                    <option value="@item.Hid" selected>@item.Hname</option>
+                }
+            </select>
+        </div>
+        @*科室*@
+        <div class="input">
+            <label for="Did">科室:</label>
+            <select name="Did" id="Did" class="form-control">
+                @foreach (var item in Model)
+                {
+                    <option value="@item.Did" selected>@item.Dname</option>
+                }
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="btn" style="margin-top:-10px;">
+        <input type="submit" value="注册" class="btn btn-success" />
+    </div>
+
+
+}
+
