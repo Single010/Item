@@ -17,20 +17,25 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <style type="text/css">
+        .breadcrumb li a {
+            color: white;
+        }
+    </style>
 </head>
 @using Order.Models;
 @model List<Adimin>
-<body style="background-color:#252C35;">
-    <div class="container">
+<body style="background-color:white;">
+    <div class="container" style="margin-top:-15px;">
         <div class="jsbg">
-            <ul class="breadcrumb">
+            <ul class="breadcrumb" style="background-color:#566374;">
                 <li><a href="#">人员管理</a></li>
                 <li><a href="#">管理员管理</a></li>
             </ul>
-            <div class="col-lg-12 mxlength" style="border:5px dashed #516877;background-color:#23241F;height:600px;">
+            <div class="col-lg-12 mxlength" style="border:5px dashed #516877;background-color:white;height:600px;">
                 <div style="margin-top:15px;display:flex;width:500px;">
                     <form class="form-inline" action="" method="post">
-                        <label for="ANmae" style="color:white;">姓名：</label>
+                        <label for="ANmae" style="color:black;">姓名：</label>
                         <input type="text" name="Nmae" id="Nmae" class="form-control" placeholder="请输入姓名" />
                         <input type="submit" value="查询" class="btn btn-success" />
                     </form>

@@ -69,7 +69,7 @@
     <Property Name="Mcount" Type="int" Nullable="false" />
     <Property Name="Hid" Type="int" Nullable="false" />
     <Property Name="Did" Type="int" Nullable="false" />
-    <Property Name="MPic" Type="nvarchar" MaxLength="10" />
+    <Property Name="MPic" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Question">
     <Key>

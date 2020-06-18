@@ -12,8 +12,18 @@
         Mediciner med = Session["med"] as Mediciner;
     }
     <link href="~/Content/Hand.css" rel="stylesheet" />
+    <style type="text/css">
+        .main-menu-nav li{
+            border-radius:5px;
+        }
+        body {
+            background-image: url('../../Content/Images/医院背景2.jpg');
+            background-repeat:no-repeat;
+            background-size:100% 100%;
+        }
+    </style>
 </head>
-<body style="margin:0px;padding:0px">
+<body style="margin:0px;padding:0px;background-color:#FBFDD8">
 
     @*灰色登录条*@
     <div class="gh-nav">
@@ -45,13 +55,13 @@
     </div>
 
 
-    <div class="navigation">
+    <div class="navigation" style="margin-left:200px; margin-top:50px;margin-bottom:30px;">
         <div class="home-menu-ctn">
             <ul class="main-menu-nav">
                 <li><a href="">我的预约</a></li>
                 <li><a href="">我的评论</a></li>
                 <li><a href="">我的问诊</a></li>
-                <li><a href="">我的信息</a></li>
+                <li><a href="~/Mediciner/MedMessageEdit/@med.Mid">我的信息</a></li>
                 <li><a href="">预约设置</a></li>
             </ul>
         </div>
@@ -59,11 +69,11 @@
 
 
 
-    <div id="content">
+    <div id="content" style="width:70%;height:500px; margin:0 auto;margin-bottom:30px;box-shadow:4px 4px 5px #999; border-radius:10px; ">
         <!--页面内容部分-->
         @RenderBody()
 
-
+    </div>
         <!--页脚-->
         <div id="footer">
             <div id="button">
@@ -82,7 +92,7 @@
                 <div class="report">违法和不良信息举报电话：0xx1-xx3xx5x6 举报邮箱：1373xxxxxx@qq.com </div>
             </div>
         </div>
-    </div>
+    
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -91,4 +101,15 @@
 </body>
 </html>
 
+<script type="text/javascript">
+      $(".main-menu-nav").children().children("a").hover(function () {
+          $(this).parents("li").css("background-color", "#80B9D6")
+          $(this).parents("li").siblings("li").css("background-color", this.translate)
+        }
+    )
+    $(".main-menu-nav").children().children("a").hover(function () {
+        $(this).css("color", "white")
+        $(this).parents("li").siblings("li").children("a").css("color", "black")
+    })
+</script>
 

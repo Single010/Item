@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "MedIndex";
+    Layout = "~/Views/Mediciner/MIndex_LayoutPage1.cshtml";
+}
+@using Order.Models;
+@model Mediciner
+    @{ 
+        List<Hospital> hos = ViewBag.hos as List<Hospital>;
+        List<Dept> dep = ViewBag.dep as List<Dept>;
+    }
+<link href="~/Content/main.css" rel="stylesheet" />
+<style type="text/css">
+    .Mainbody {
+        background-color:#80B9D6;
+        opacity:0.9;
+        height: 500px;
+        width: auto;
+        border-radius:10px;
+    }
+</style>
+<div class="Mainbody">
+    <div style="width:50%;margin-top:50px;margin:0 auto;font-size:24px;text-align:center">我的信息</div>
+    <form action="/Mediciner/MedMessage/" method="post" id="form1" enctype="multipart/form-data" style="position:relative; width:90%;height:450px;border:1px solid white;margin:0 auto;" >
+        <div style="float:left;margin-left:150px;margin-top:50px">
+            <div class="form-group">
+                @Html.Hidden("Mid")
+                <label for="Mloginname" class="col-form-label">登录名:</label>
+                <input type="text" class="form-control" id="Mloginname" name="Mloginname" value="@Model.Mloginname">
+            </div>
+            <div class="form-group">
+                <label for="Mpwd" class="col-form-label">密码:</label>
+                <input type="password" class="form-control" id="Mpwd" name="Mpwd" value="@Model.Mpwd">
+            </div>
+            <div class="form-group">
+                <label for="Mname" class="col-form-label">姓名:</label>
+                <input type="text" class="form-control" id="Mname" name="Mname" value="@Model.Mname">
+            </div>
+            <div class="form-group">
+                <label for="Gender" class="col-form-label">性别:</label>
+                <input type="text" class="form-control" id="Gender" name="Gender" value="@Model.Gender">
+            </div>
+            <div class="form-group">
+                <label for="Titles" class="col-form-label">职称:</label>
+                <input type="text" class="form-control" id="Titles" name="Titles" value="@Model.Titles">
+            </div>
+        </div>
+        <div style="float:right;margin-right:150px;margin-top:50px">
+            <div class="form-group">
+                <label for="Mspec" class="col-form-label">介绍:</label>
+                <input type="text" class="form-control" id="Mspec" name="Mspec" value="@Model.Mspec">
+            </div>
+            <div class="form-group">
+                <label for="Hid" class="col-form-label">所属医院:</label>
+                <select name="Hid" id="Hid" class="form-control">
+                    @foreach (var item in hos)
+                    {
+                        var check = false;
+                        if (Model.Hid == item.Hid)
+                        {
+                            check = true;
+                        }
+                        else
+                        {
+                            check = false;
+                        }
+                        <option value="@item.Hid" selected="@check">@item.Hname</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Did" class="col-form-label">所属科室:</label>
+                <select name="Did" id="Did" class="form-control">
+                    @foreach (var item in dep.Where(p=>p.Pdid!=null))
+                    {
+                        var check1 = false;
+                        if (Model.Did == item.Did)
+                        {
+                            check1 = true;
+                        }
+                        else
+                        {
+                            check1 = false;
+                        }
+                        <option value="@item.Did" selected="@check1">@item.Dname</option>
+                    }
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="MPic">照片:</label>
+                @if (Model.MPic == null || Model.MPic=="")
+                {
+                    <img src="~/Content/Images/默认.jpg" style="width:60px;height:80px" />
+                }
+                else
+                {
+                    <img src="~/Content/HosImage/@Model.MPic" style="width:60px;height:80px" />
+                }
+                <input type="file" name="file" id="file" class="form-control" />
+                <input type="hidden" name="Photo" value="@Model.MPic" />
+            </div>
+            </div>
+            <input type="submit" value="确定" class="btn btn-success" style="position:absolute;top:400px;left:45%"/>
+    </form>
+</div>
+
+

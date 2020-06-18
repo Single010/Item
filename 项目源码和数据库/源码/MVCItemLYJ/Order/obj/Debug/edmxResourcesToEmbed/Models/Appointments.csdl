@@ -79,7 +79,7 @@
     <Property Name="Mcount" Type="Int32" Nullable="false" />
     <Property Name="Hid" Type="Int32" Nullable="false" />
     <Property Name="Did" Type="Int32" Nullable="false" />
-    <Property Name="MPic" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="MPic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Appointment" Relationship="Self.FK_Appointment_Mediciner" FromRole="Mediciner" ToRole="Appointment" />
     <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Mediciner" FromRole="Mediciner" ToRole="Comment" />
     <NavigationProperty Name="Dept" Relationship="Self.FK_Mediciner_Dept" FromRole="Mediciner" ToRole="Dept" />

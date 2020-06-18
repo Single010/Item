@@ -186,15 +186,21 @@
     <Content Include="Content\Images\one.png" />
     <Content Include="Content\Images\three.png" />
     <Content Include="Content\Images\two.png" />
+    <Content Include="Content\Images\动画医生.jpg" />
+    <Content Include="Content\Images\动画医生2.jpg" />
     <Content Include="Content\Images\医用工具图片_彼岸图网.jpg" />
     <Content Include="Content\Images\医院1.jpg" />
     <Content Include="Content\Images\医院2.jpg" />
     <Content Include="Content\Images\医院3.jpg" />
     <Content Include="Content\Images\医院4.jpg" />
+    <Content Include="Content\Images\医院背景1.jpg" />
+    <Content Include="Content\Images\医院背景2.jpg" />
+    <Content Include="Content\Images\医院默认图.jpg" />
     <Content Include="Content\Images\品台.jpg" />
     <Content Include="Content\Images\拿着听诊器的医生图片_彼岸图网.jpg" />
     <Content Include="Content\Images\标志.jpg" />
     <Content Include="Content\Images\美丽雪山湖泊风景4k壁纸3840x2160_彼岸图网.jpg" />
+    <Content Include="Content\Images\默认.jpg" />
     <Content Include="Content\Main.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -290,6 +296,8 @@
     <Content Include="Views\Adimin\TwoDept.cshtml" />
     <Content Include="Views\Adimin\EditFristDept.cshtml" />
     <Content Include="Views\Adimin\EditTwoDept.cshtml" />
+    <Content Include="Views\Mediciner\MedMessage.cshtml" />
+    <Content Include="Views\Mediciner\MedMessageEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "MedIndex";
+    Layout = "~/Views/Mediciner/MIndex_LayoutPage1.cshtml";
+}
+@using Order.Models;
+@model Mediciner
+@{
+    List<Hospital> hos = ViewBag.hos as List<Hospital>;
+    List<Dept> dep = ViewBag.dep as List<Dept>;
+}
+<link href="~/Content/main.css" rel="stylesheet" />
+<style type="text/css">
+    .Mainbody {
+        background-color: #80B9D6;
+        opacity: 0.9;
+        height: 500px;
+        width: auto;
+        border-radius: 10px;
+    }
+</style>
+<div class="Mainbody">
+    <div style="width:50%;margin-top:50px;margin:0 auto;font-size:24px;text-align:center">我的信息</div>
+    <form action="/Mediciner/MedMessage/" method="post" id="form1" enctype="multipart/form-data" style="position:relative; width:90%;height:450px;border:1px solid white;margin:0 auto;">
+        <div style="float:left;margin-left:250px;margin-top:50px">
+            <div class="form-group" style="margin-top:40px;">
+                @Html.Hidden("Mid")
+                <label for="Mloginname" class="col-form-label">登录名:</label>
+                <label  id="Mloginname" name="Mloginname">@Model.Mloginname</label>
+            </div>
+            <div class="form-group"style="margin-top:40px;">
+                <label for="Mname" class="col-form-label">姓名:</label>
+                <label  id="Mloginname" name="Mloginname">@Model.Mname</label>
+            </div>
+            <div class="form-group"style="margin-top:40px;">
+                <label for="Gender" class="col-form-label">性别:</label>
+                <label  id="Mloginname" name="Mloginname">@Model.Gender</label>
+            </div>
+            <div class="form-group"style="margin-top:40px;">
+                <label for="Titles" class="col-form-label">职称:</label>
+                <label  id="Mloginname" name="Mloginname">@Model.Titles</label>
+            </div>
+        </div>
+        <div style="float:right;margin-right:250px;margin-top:50px">
+            <div class="form-group"style="margin-top:40px;">
+                <label for="Mspec" class="col-form-label">介绍:</label>
+                <label  id="Mloginname" name="Mloginname">@Model.Mspec</label>
+            </div>
+            <div class="form-group" style="margin-top:40px;">
+                <label for="Hid" class="col-form-label">所属医院:</label>
+                <label  id="Mloginname" name="Mloginname">@Model.Hospital.Hname</label>
+            </div>
+
+            <div class="form-group" style="margin-top:40px;">
+                <label for="Did" class="col-form-label">所属科室:</label>
+                <label  id="Mloginname" name="Mloginname">@Model.Dept.Dname</label>
+            </div>
+
+
+            <div class="form-group" style="margin-top:40px;">
+                <label for="MPic">照片:</label>
+                @if (Model.MPic == null || Model.MPic == "")
+                {
+                    <img src="~/Content/Images/默认.jpg" style="width:60px;height:80px" />
+                }
+                else
+                {
+                    <img src="~/Content/HosImage/@Model.MPic" style="width:60px;height:80px" />
+                }
+            </div>
+        </div>
+        <a  href="~/Mediciner/MedMessage/@Model.Mid"class="btn btn-success" style="position:absolute;top:400px;left:45%">修改</a>
+    </form>
+</div>
+
+

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -98,6 +99,70 @@ namespace Order.Controllers
         public ActionResult MedIndex()
         {
             return View();
+        }
+
+
+        /// <summary>
+        /// 我的信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult MedMessageEdit(int? id)
+        {
+            Mediciner med = db.Mediciner.Find(id);
+            List<Hospital> hos = db.Hospital.ToList();
+            List<Dept> dep = db.Dept.ToList();
+            ViewBag.hos = hos;
+            ViewBag.dep = dep;
+            return View(med);
+        }
+        /// <summary>
+        /// 修改我的信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult MedMessage(int? id)
+        {
+            Mediciner med = db.Mediciner.Find(id);
+            List<Hospital> hos = db.Hospital.ToList();
+            List<Dept> dep = db.Dept.ToList();
+            ViewBag.hos = hos;
+            ViewBag.dep = dep;
+            return View(med);
+        }
+        
+        [HttpPost]
+        public ActionResult MedMessage(Mediciner med,HttpPostedFileBase file, string photo)
+        {
+
+            if (file != null)
+            {                //获取文件名
+                string fileName = Path.GetFileName(file.FileName);
+                //保存
+                file.SaveAs(Server.MapPath("~/Content/HosImage/" + file.FileName));
+                //将文件名赋值给实体类照片属性
+                med.MPic = fileName;
+            }
+            else
+            {
+                //保留原图片
+                med.MPic = photo;
+            }
+            Mediciner med2 = db.Mediciner.Find(med.Mid);
+            med2.Mloginname = med.Mloginname;
+            med2.Mpwd = med.Mpwd;
+            med2.Mname = med.Mname;
+            med2.Gender = med.Gender;
+            med2.Titles = med.Titles;
+            med2.Mspec = med.Mspec;
+            med2.Hid = med.Hid;
+            med2.Did = med.Did;
+            med2.MPic = med.MPic;
+            db.SaveChanges();
+            List<Hospital> hos = db.Hospital.ToList();
+            List<Dept> dep = db.Dept.ToList();
+            ViewBag.hos = hos;
+            ViewBag.dep = dep;
+            return RedirectToAction("MedMessageEdit","Mediciner",new { id=med2.Mid});
         }
     }
 }
