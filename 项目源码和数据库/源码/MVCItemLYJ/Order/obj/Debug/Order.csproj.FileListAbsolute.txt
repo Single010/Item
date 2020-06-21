@@ -268,3 +268,4 @@ C:\Users\de'l'l\Desktop\毕业设计\项目源码和数据库\源码\MVCItemLYJ\
 C:\Users\de'l'l\Desktop\毕业设计\项目源码和数据库\源码\MVCItemLYJ\Order\obj\Debug\Order.dll
 C:\Users\de'l'l\Desktop\毕业设计\项目源码和数据库\源码\MVCItemLYJ\Order\obj\Debug\Order.pdb
 C:\Users\de'l'l\Desktop\毕业设计\项目源码和数据库\源码\MVCItemLYJ\Order\bin\zh-Hans\EntityFramework.SqlServer.resources.dll
+C:\Users\de'l'l\Desktop\毕业设计\项目源码和数据库\源码\MVCItemLYJ\Order\obj\Debug\Order.csprojAssemblyReference.cache

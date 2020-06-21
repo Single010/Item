@@ -6,10 +6,11 @@
 @using Order.Models;
 @{
     List<Dept> dept = ViewBag.dept as List<Dept>;
+    List<Hospital> hos = ViewBag.hos as List<Hospital>;
 }
 
 <link href="~/Content/main.css" rel="stylesheet" />
-<link href="~/Content/Med.css" rel="stylesheet" />
+<link href="~/Content/FindMed.css" rel="stylesheet" />
 @*分割线*@
 <div class="fg"></div>
 
@@ -102,7 +103,7 @@
     </div>
 </div>
 
-
+<p style="font-size:20px;font-weight:bold;margin-top:80px;margin-left:75px;">挂号预约</p>
 @*医生展示*@
 <div class="Med">
     @*<ul>
@@ -115,10 +116,13 @@
         </ul>*@
 
     <ul id="myTab" class="nav nav-tabs">
-        <li flag="selected" class="active" name="frist">
-            <a href="#">病科</a>
-        </li>
-        @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Take(11))
+        @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Take(1))
+        {
+            <li flag="selected" class="active" name="frist">
+                @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneDept" })
+            </li>
+        }
+        @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Take(15).Skip(1))
         {
             <li flag="selected">
                 @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
@@ -130,14 +134,54 @@
         </li>
     </ul>
     <div id="myTabContent" class="tab-content table-bordered" style="border-top:none">
-        <div class="tab-pane fade in active" id="change">
-
-            sssss
+        <div class="tab-pane fade in active" id="change" style="display:flex">
 
         </div>
     </div>
 
 </div>
+
+<p style="font-size:20px;font-weight:bold;margin:0 auto;margin-top:80px;margin-left:75px;">医院选择</p>
+@*医院展示*@
+<div class="Hos">
+    <ul id="myTab" class="nav nav-tabs">
+        @foreach (var item in hos.Take(1))
+        {
+            <li flag="selected" class="active" name="frist">
+                @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name= item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneAdds" })
+            </li>
+        }
+        @foreach (var item in hos.Select(s=>new {s.Address}).Distinct().Take(10).Skip(1))
+        {
+            <li flag="selected">
+                @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name= item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+
+            </li>
+        }
+        <li flag="selected">
+            <a href="#">更多医院>></a>
+        </li>
+    </ul>
+    <div id="myTabContent" class="tab-content table-bordered" style="border-top:none">
+        <div class="tab-pane fade in active" id="change1" style="display:flex">
+
+        </div>
+    </div>
+
+    <div class="forbit">
+        <p style="font-size:16px;color:red;font-weight:bold">注意事项</p>
+        <ul class="list-group ">
+            <li class="list-group-item">每位医生都有预约次数</li>
+            <li class="list-group-item">预约选择预约时间</li>
+            <li class="list-group-item">根据预约号去医院取号</li>
+            <li class="list-group-item">每位医生的预约时间不同</li>
+            <li class="list-group-item">请提前预约</li>
+        </ul>
+    </div>
+
+</div>
+
+
 
 
 @section scripts{
@@ -148,6 +192,8 @@
                 $(this).addClass("active");
 
             });
+            $(".oneDept").click();
+            $(".oneAdds").click();
         })
     </script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

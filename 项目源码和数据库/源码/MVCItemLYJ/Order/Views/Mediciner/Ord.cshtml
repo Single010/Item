@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "MedIndex";
+    Layout = "~/Views/Mediciner/MIndex_LayoutPage1.cshtml";
+}
+@using Order.Models;
+@model Mediciner
+<link href="~/Content/main.css" rel="stylesheet" />
+<style type="text/css">
+    .Mainbody {
+        background-color: #80B9D6;
+        opacity: 0.9;
+        height: 500px;
+        width: auto;
+        border-radius: 10px;
+    }
+</style>
+<div class="Mainbody">
+    <div style="width:50%;margin-top:50px;margin:0 auto;font-size:24px;text-align:center">预约设置</div>
+    <form action="/Mediciner/Ord/" method="post" id="form1" enctype="multipart/form-data" style="position:relative; width:90%;height:450px;border:1px solid white;margin:0 auto;">
+        <div style="float:left;margin-left:150px;margin-top:50px">
+            <div class="form-group">
+                @Html.Hidden("Mid")
+                <label for="MtimeA" class="col-form-label">时段一:</label>
+                <input type="date" class="form-control" id="MtimeA" name="MtimeA" value="@Model.MtimeA">
+            </div>
+            <div class="form-group">
+                <label for="MtimeB" class="col-form-label">时段2:</label>
+                <input type="date" class="form-control" id="MtimeB" name="MtimeB" value="@Model.MtimeB">
+            </div>
+            <div class="form-group">
+                <label for="MtimeC" class="col-form-label">时段3:</label>
+                <input type="date" class="form-control" id="MtimeC" name="MtimeC" value="@Model.MtimeC">
+            </div>
+        </div>
+        <div style="float:right;margin-right:150px;margin-top:50px">
+            <div class="form-group">
+                <label for="Mcount" class="col-form-label">次数:</label>
+                <input type="text" class="form-control" id="Mcount" name="Mcount" value="@Model.Mcount">
+            </div>
+        </div>
+        <input type="submit" value="确定" class="btn btn-success" style="position:absolute;top:400px;left:45%" />
+    </form>
+</div>
+
+
