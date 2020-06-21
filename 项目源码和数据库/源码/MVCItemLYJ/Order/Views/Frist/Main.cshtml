@@ -3,11 +3,13 @@
     ViewBag.Title = "Main";
     Layout = "~/Views/Shared/_LayoutOrder.cshtml";
 }
+@using Order.Models;
+@{
+    List<Dept> dept = ViewBag.dept as List<Dept>;
+}
 
 <link href="~/Content/main.css" rel="stylesheet" />
-
-
-
+<link href="~/Content/Med.css" rel="stylesheet" />
 @*分割线*@
 <div class="fg"></div>
 
@@ -16,11 +18,19 @@
     <div class="percent">
         <div class="case">
             <ul class="main-menu-nav1">
-                <li class="main"><span>内科</span><ul class="assistant"><li><a href="">糖尿病</a></li><span>|</span><li><a href="">高血压</a></li><span>|</span><li><a href="">冠心病</a></li></ul></li>
-                <li class="main"><span>内科</span><ul class="assistant"><li><a href="">糖尿病</a></li><span>|</span><li><a href="">高血压</a></li><span>|</span><li><a href="">冠心病</a></li></ul></li>
-                <li class="main"><span>内科</span><ul class="assistant"><li><a href="">糖尿病</a></li><span>|</span><li><a href="">高血压</a></li><span>|</span><li><a href="">冠心病</a></li></ul></li>
-                <li class="main"><span>内科</span><ul class="assistant"><li><a href="">糖尿病</a></li><span>|</span><li><a href="">高血压</a></li><span>|</span><li><a href="">冠心病</a></li></ul></li>
-                <li class="main"><span>内科</span><ul class="assistant"><li><a href="">糖尿病</a></li><span>|</span><li><a href="">高血压</a></li><span>|</span><li><a href="">冠心病</a></li></ul></li>
+                @foreach (var item in dept.Where(p => p.Pdid.ToString() == "" || p.Pdid == null).Take(5))
+                {
+                    <li class="main">
+                        <span>@item.Dname</span>
+                        <ul class="assistant">
+                            @foreach (var item1 in dept.Where(p => p.Pdid == item.Did).Take(3))
+                            {
+                                <li><a href="">@item1.Dname</a></li>
+                                <span>|</span>
+                            }
+                        </ul>
+                    </li>
+                }
                 <li class="main"><span class="glyphicon glyphicon-plus"></span><span>更多科室</span></li>
             </ul>
         </div>
@@ -93,3 +103,53 @@
 </div>
 
 
+@*医生展示*@
+<div class="Med">
+    @*<ul>
+            @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null))
+            {
+                <li class="dname"><a href="">@item.Dname</a></li>
+                <lable>|</lable>
+            }
+
+        </ul>*@
+
+    <ul id="myTab" class="nav nav-tabs">
+        <li flag="selected" class="active" name="frist">
+            <a href="#">病科</a>
+        </li>
+        @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Take(11))
+        {
+            <li flag="selected">
+                @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+
+            </li>
+        }
+        <li flag="selected">
+            <a href="#">更多科室>></a>
+        </li>
+    </ul>
+    <div id="myTabContent" class="tab-content table-bordered" style="border-top:none">
+        <div class="tab-pane fade in active" id="change">
+
+            sssss
+
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $("[flag='selected']").click(function () {
+                $(this).siblings().removeClass("active");
+                $(this).addClass("active");
+
+            });
+        })
+    </script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}

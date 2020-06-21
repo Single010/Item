@@ -202,6 +202,7 @@
     <Content Include="Content\Images\美丽雪山湖泊风景4k壁纸3840x2160_彼岸图网.jpg" />
     <Content Include="Content\Images\默认.jpg" />
     <Content Include="Content\Main.css" />
+    <Content Include="Content\Med.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -218,6 +219,8 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="新建文件夹\css\main.css" />
     <Content Include="新建文件夹\css\style.css" />
     <Content Include="新建文件夹\img\left.png" />
@@ -298,6 +301,9 @@
     <Content Include="Views\Adimin\EditTwoDept.cshtml" />
     <Content Include="Views\Mediciner\MedMessage.cshtml" />
     <Content Include="Views\Mediciner\MedMessageEdit.cshtml" />
+    <Content Include="Views\Mediciner\Ord.cshtml" />
+    <Content Include="Views\Mediciner\Ords.cshtml" />
+    <Content Include="Views\Frist\FindMed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

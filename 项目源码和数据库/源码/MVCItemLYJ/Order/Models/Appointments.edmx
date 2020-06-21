@@ -68,9 +68,9 @@
           <Property Name="Gender" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="Titles" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Mspec" Type="nvarchar" MaxLength="100" />
-          <Property Name="MtimeA" Type="datetime" />
-          <Property Name="MtimeB" Type="datetime" />
-          <Property Name="MtimeC" Type="datetime" />
+          <Property Name="MtimeA" Type="date" />
+          <Property Name="MtimeB" Type="date" />
+          <Property Name="MtimeC" Type="date" />
           <Property Name="Mcount" Type="int" Nullable="false" />
           <Property Name="Hid" Type="int" Nullable="false" />
           <Property Name="Did" Type="int" Nullable="false" />
@@ -347,9 +347,9 @@
           <Property Name="Gender" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Titles" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Mspec" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MtimeA" Type="DateTime" Precision="3" />
-          <Property Name="MtimeB" Type="DateTime" Precision="3" />
-          <Property Name="MtimeC" Type="DateTime" Precision="3" />
+          <Property Name="MtimeA" Type="DateTime" Precision="0" />
+          <Property Name="MtimeB" Type="DateTime" Precision="0" />
+          <Property Name="MtimeC" Type="DateTime" Precision="0" />
           <Property Name="Mcount" Type="Int32" Nullable="false" />
           <Property Name="Hid" Type="Int32" Nullable="false" />
           <Property Name="Did" Type="Int32" Nullable="false" />

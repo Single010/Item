@@ -455,7 +455,7 @@ namespace Order.Controllers
         {
             db.Entry(dept).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("TwoDept", "Adimin");
+            return RedirectToAction("TwoDept","Adimin");
         }
 
 

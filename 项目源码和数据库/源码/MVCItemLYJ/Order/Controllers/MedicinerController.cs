@@ -164,5 +164,46 @@ namespace Order.Controllers
             ViewBag.dep = dep;
             return RedirectToAction("MedMessageEdit","Mediciner",new { id=med2.Mid});
         }
+
+
+        public ActionResult Ords(int? id)
+        {
+            Mediciner med = db.Mediciner.Find(id);
+            return View(med);
+        }
+
+
+        public ActionResult Ord(int? id)
+        {
+            Mediciner med = db.Mediciner.Find(id);
+            return View(med);
+        }
+        [HttpPost]
+        public ActionResult Ord(Mediciner med)
+        {
+            Mediciner med2 = db.Mediciner.Find(med.Mid);
+             var time=DateTime.Now;
+            if ((med.MtimeA<time) || (med.MtimeB<time) || (med.MtimeC<time))
+            {
+                return Content("<script>alert('时间选择有误！');history.go(-1)</script>");
+            }
+            else
+            {
+                if ((med.MtimeA==med.MtimeB) || (med.MtimeA==med.MtimeC) ||(med.MtimeB==med.MtimeC))
+                {
+                    return Content("<script>alert('时间选择有重复！');history.go(-1)</script>");
+                }
+                else
+                {
+                    med2.MtimeA = med.MtimeA;
+                    med2.MtimeB = med.MtimeB;
+                    med2.MtimeC = med.MtimeC;
+
+                }
+            }
+            med2.Mcount = med.Mcount;
+            db.SaveChanges();
+            return RedirectToAction("Ords", "Mediciner", new { id = med2.Mid });
+        }
     }
 }

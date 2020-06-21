@@ -34,7 +34,7 @@
             <div class="col-lg-12 mxlength" style="border:5px dashed #516877;background-color:#23241F;height:600px;position:relative;">
                 <div style="margin:0 auto;border:1px solid gray;width:60%;height:300px; background-color:white;margin-top:170px;border-radius:10px 10px">
                     <h2 style="margin-left:30%;">二级科室信息修改</h2>
-                    <form action="/Adimin/EditFristDept/" method="post" id="form2" enctype="multipart/form-data" style="position:relative">
+                    <form action="/Adimin/EditTwoDept/" method="post" id="form2" enctype="multipart/form-data" style="position:relative">
                         <div style="display:flex;width:90%;margin:30px auto;justify-content:center">
                             <div class="form-group">
                                 @Html.Hidden("Did")
@@ -50,7 +50,16 @@
                                 <select name="Pdid" id="Pdid" class="form-control">
                                     @foreach (var item in dept2.Where(p => p.Pdid == null))
                                     {
-                                        <option value="@item.Did" selected>@item.Dname</option>
+                                         var check1 = false;
+                                        if (Model.Pdid==item.Did)
+                                        {
+                                              check1 = true;
+                                        }
+                                         else
+                                        {
+                                            check1 = false;
+                                        }
+                                        <option value="@item.Did" selected="@check1">@item.Dname</option>
                                     }
                                 </select>
                             </div>

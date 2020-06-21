@@ -45,7 +45,6 @@
                         <input type="submit" value="查询" class="btn btn-success" />
                     </form>
                     <a href="" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" style="margin-left:20px;">添加</a>
-                    <a href="~/Adimin/TwoDept/" class="btn btn-warning" style="margin-left:20px;">刷新</a>
                 </div>
 
                 <table class="table table-bordered table-hover" style="background-color: white; margin-top: 20px;">
@@ -86,7 +85,7 @@
         width: 1100px;">
                     <div classs="row">
                         <div class="col-lg-8">
-                            <label style="color:white;">总共 @ViewBag.totalCount 行</label>
+                            <label style="color:black;">总共 @ViewBag.totalCount 行</label>
                             <select onchange="window.location = this.value;">
                                 @{
                                     int[] count = new[] { 2, 3, 4, 5 };
