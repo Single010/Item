@@ -1,11 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "MyOrder";
+    ViewBag.Title = "Question";
     Layout = "~/Views/Users/UIndex_LayoutPage1.cshtml";
 }
+
 @using Order.Models;
 @{
-    List<Appointment> app = ViewBag.app as List<Appointment>;
+    List<Question> ques = ViewBag.ques as List<Question>;
 }
 <link href="~/Content/Main.css" rel="stylesheet" />
 <style type="text/css">
@@ -20,36 +21,36 @@
     }
 </style>
 <div class="Mainbody">
-    <div style="width:50%;margin-top:50px;margin:0 auto;font-size:24px;text-align:center">我的预约</div>
+    <div style="width:50%;margin-top:50px;margin:0 auto;font-size:24px;text-align:center">我的问诊</div>
     <table class="table table-bordered table-hover" style="border:1px solid black;margin-top: 20px;">
         <thead class="bg-success text-white">
             <tr>
                 <th>编号</th>
                 <th>医生</th>
-                <th>预约时间</th>
-                <th>提交时间</th>
+                <th>问诊时间</th>
+                <th>提问</th>
+                <th>回答</th>
                 <th>状态</th>
-                <th>预约号</th>
                 <th>操作</th>
             </tr>
         </thead>
-        @foreach (var item in app)
+        @foreach (var item in ques)
         {
     <tr>
-        <td>@item.Aid</td>
+        <td>@item.Qid</td>
         <td>@item.Mediciner.Mname</td>
-        <td>@item.Atime</td>
-        <td>@item.Ttime</td>
-        @if (item.Astate == 0)
+        <td>@item.Qtime</td>
+        <td>@item.Qcontent</td>
+        <td>@item.Qanswer</td>
+        @if (item.Qstate == 0)
         {
-            <td>未开始</td>
+            <td style="color:red">未回答</td>
         }
         else
         {
-            <td>已结束</td>
+            <td style="color:forestgreen">未回答</td>
         }
-        <td>@item.Anun</td>
-        <td><a href="/Users/DeleteApp/@item.Aid" class="btn btn-danger" onclick="return confirm('您确定要删除 @item.Mediciner.Mname 大夫的预约信息吗？')">删除</a></td>
+        <td><a href="/Users/DeleteQues/@item.Qid" class="btn btn-danger" onclick="return confirm('您确定要删除 @item.Mediciner.Mname 大夫的问诊信息吗？')">删除</a></td>
     </tr>
         }
     </table>
@@ -71,11 +72,11 @@
                 {
                     if (item.Equals(ViewBag.pageCount))
                     {
-                        <option value="/Users/MyOrder?pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                        <option value="/Users/Question?pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
                     }
                     else
                     {
-                        <option value="/Users/MyOrder?pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                        <option value="/Users/Question?pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
                     }
 
                 }
@@ -84,11 +85,11 @@
         <div class="col-lg-4">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="/Users/MyOrder?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a></li>
+                    <li class="page-item"><a class="page-link" href="/Users/Question?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a></li>
 
                     @if (@ViewBag.pageIndex > 1)
                     {
-                        <li class="page-item"><a class="page-link" href="/Users/MyOrder?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a></li>
+                        <li class="page-item"><a class="page-link" href="/Users/Question?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a></li>
                     }
                     else
                     {
@@ -99,17 +100,18 @@
 
                     @if (@ViewBag.pageIndex < @ViewBag.totalPage)
                     {
-                        <li class="page-item"><a class="page-link" href="/Users/MyOrder?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a></li>
+                        <li class="page-item"><a class="page-link" href="/Users/Question?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a></li>
                     }
                     else
                     {
                         <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
                     }
 
-                    <li class="page-item"><a class="page-link" href="/Users/MyOrder?pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+                    <li class="page-item"><a class="page-link" href="/Users/Question?pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
                 </ul>
             </nav>
         </div>
     </div>
 
 </div>@*分页尾*@
+

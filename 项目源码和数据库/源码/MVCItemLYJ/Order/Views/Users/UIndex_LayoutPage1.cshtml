@@ -12,6 +12,17 @@
         User user = Session["user"] as User;
     }
     <link href="~/Content/hand.css" rel="stylesheet" />
+    <style type="text/css">
+        .main-menu-nav li {
+            border-radius: 5px;
+        }
+
+        body {
+            background-image: url('../../Content/Images/准备给病人做手术的医生图片_彼岸图网.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
 </head>
 <body style="margin:0px;padding:0px">
 
@@ -19,7 +30,7 @@
     <div class="gh-nav">
         <div class="container g-clear">
             <div class="g-left" id="">
-                <span class="text">@*@user.Uname*@ xx您好！</span>
+                <span class="text">@user.Uname 您好！</span>
                 <a href="/Mediciner/Logout">退出</a>
             </div>
 
@@ -44,62 +55,42 @@
         </div>
     </div>
 
+    @*中间部分放背景*@
 
-    <div class="gh-main">
-        <div class="container g-clear1" style="width: 1230px">
-            <div class="gh-logo ">
-                <img src="~/Content/Images/标志.jpg" alt="微医" class="wy-logo" />
-            </div>
-            <div class="gh-search gh-web-search gh-search-left ">
-                <form class="gh-search-form" action="" name="qform">
-                    <span class="glyphicon glyphicon-search" style=" width: 90%; height: 30px; line-height: 30px;">
-                        <span class="search-icon"></span>
-                        <input type="text" name="q" value="" autocomplete="off" maxlength="50" class="J_SearchQ" placeholder="请输入医院名" style="width:90%; border:none;outline:none" />
-                    </span>
-                    <input type="submit" value="搜索" class="gbn gbt-green2" style="height:34px;width:50px;background-color:#6EB92C;border:none;outline:none;color:white;font-size:16px;" />
-                    <div class="clear"></div>
-                </form>
-            </div>
-            <span class="gh-search-tips">
-                <img src="~/Content/Images/品台.jpg" />
-            </span>
-        </div>
-    </div>
-    <div class="navigation">
-        <div class="home-menu-ctn">
-            <ul class="main-menu-nav">
-                <li><a href="/Users/MyOrder">我的预约</a></li>
-                <li><a href="">我的评论</a></li>
-                <li><a href="">我的问诊</a></li>
-                <li><a href="">我的信息</a></li>
-            </ul>
-        </div>
-    </div>
-
-
-
-    <div id="content">
-        <!--页面内容部分-->
-        @RenderBody()
-
-
-        <!--页脚-->
-        <div id="footer">
-            <div id="button">
-                <ul>
-                    <li><a href="#">服务条款</a></li>
-                    <li>丨</li>
-                    <li><a href="#">隐私政策</a></li>
-                    <li>丨</li>
-                    <li><a href="#">儿童政策</a></li>
-                    <li>丨</li>
-                    <li><a href="#">意见反馈</a></li>
-                    <li>丨</li>
-                    <li><a href="#">投诉</a></li>
+        <div class="navigation"style="margin-left:200px; margin-top:50px;margin-bottom:30px;">
+            <div class="home-menu-ctn">
+                <ul class="main-menu-nav" >
+                    <li><a href="/Users/MyOrder">我的预约</a></li>
+                    <li><a href="">我的评论</a></li>
+                    <li><a href="/Users/Question">我的问诊</a></li>
+                    <li><a href="">我的信息</a></li>
                 </ul>
-                <div class="number">快医公司版权所有©199X-20X9XXXX科技有限公司运营：浙网文[20XX]3X0X-X6X号</div>
-                <div class="report">违法和不良信息举报电话：0xx1-xx3xx5x6 举报邮箱：1373xxxxxx@qq.com </div>
             </div>
+        </div>
+
+
+
+        <div id="content" style="width:70%;height:500px; margin:0 auto;margin-bottom:30px;box-shadow:4px 4px 5px #999; border-radius:10px; ">
+            <!--页面内容部分-->
+            @RenderBody()
+
+        </div>
+    <!--页脚-->
+    <div id="footer">
+        <div id="button">
+            <ul>
+                <li><a href="#">服务条款</a></li>
+                <li>丨</li>
+                <li><a href="#">隐私政策</a></li>
+                <li>丨</li>
+                <li><a href="#">儿童政策</a></li>
+                <li>丨</li>
+                <li><a href="#">意见反馈</a></li>
+                <li>丨</li>
+                <li><a href="#">投诉</a></li>
+            </ul>
+            <div class="number">快医公司版权所有©199X-20X9XXXX科技有限公司运营：浙网文[20XX]3X0X-X6X号</div>
+            <div class="report">违法和不良信息举报电话：0xx1-xx3xx5x6 举报邮箱：1373xxxxxx@qq.com </div>
         </div>
     </div>
 
@@ -110,3 +101,14 @@
 </body>
 </html>
 
+<script type="text/javascript">
+    $(".main-menu-nav").children().children("a").hover(function () {
+          $(this).parents("li").siblings("li").css("background-color", this.translate)
+          $(this).parents("li").css("background-color", "#8A8A89")
+        }
+    )
+    $(".main-menu-nav").children().children("a").hover(function () {
+        $(this).css("color", "#F9A649")
+        $(this).parents("li").siblings("li").children("a").css("color", "black")
+    })
+</script>

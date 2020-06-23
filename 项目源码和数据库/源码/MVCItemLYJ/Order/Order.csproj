@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdiminController.cs" />
+    <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\FristController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicinerController.cs" />
@@ -187,6 +188,7 @@
     <Content Include="Content\Images\one.png" />
     <Content Include="Content\Images\three.png" />
     <Content Include="Content\Images\two.png" />
+    <Content Include="Content\Images\准备给病人做手术的医生图片_彼岸图网.jpg" />
     <Content Include="Content\Images\动画医生.jpg" />
     <Content Include="Content\Images\动画医生2.jpg" />
     <Content Include="Content\Images\医用工具图片_彼岸图网.jpg" />
@@ -200,6 +202,8 @@
     <Content Include="Content\Images\品台.jpg" />
     <Content Include="Content\Images\拿着听诊器的医生图片_彼岸图网.jpg" />
     <Content Include="Content\Images\标志.jpg" />
+    <Content Include="Content\Images\用户背景.jpg" />
+    <Content Include="Content\Images\用户背景1.jpg" />
     <Content Include="Content\Images\美丽雪山湖泊风景4k壁纸3840x2160_彼岸图网.jpg" />
     <Content Include="Content\Images\默认.jpg" />
     <Content Include="Content\Main.css" />
@@ -305,10 +309,12 @@
     <Content Include="Views\Mediciner\Ords.cshtml" />
     <Content Include="Views\Frist\FindMed.cshtml" />
     <Content Include="Views\Frist\FindHos.cshtml" />
+    <Content Include="Views\Users\Question.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\HosImage\" />
+    <Folder Include="Views\Appointment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -85,7 +85,7 @@
           <Property Name="Mid" Type="int" Nullable="false" />
           <Property Name="Qtime" Type="datetime" Nullable="false" />
           <Property Name="Qcontent" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Qanswer" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Qanswer" Type="nvarchar" MaxLength="100" />
           <Property Name="Qstate" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
@@ -121,18 +121,6 @@
             </Principal>
             <Dependent Role="Appointment">
               <PropertyRef Name="Uid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comment_Appointment">
-          <End Role="Appointment" Type="Self.Appointment" Multiplicity="1" />
-          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Appointment">
-              <PropertyRef Name="Aid" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="Aid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -236,10 +224,6 @@
           <AssociationSet Name="FK_Appointment_User" Association="Self.FK_Appointment_User">
             <End Role="User" EntitySet="User" />
             <End Role="Appointment" EntitySet="Appointment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_Appointment" Association="Self.FK_Comment_Appointment">
-            <End Role="Appointment" EntitySet="Appointment" />
-            <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
           <AssociationSet Name="FK_Comment_Mediciner" Association="Self.FK_Comment_Mediciner">
             <End Role="Mediciner" EntitySet="Mediciner" />
@@ -369,7 +353,7 @@
           <Property Name="Mid" Type="Int32" Nullable="false" />
           <Property Name="Qtime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Qcontent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Qanswer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Qanswer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Qstate" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Mediciner" Relationship="Self.FK_Question_Mediciner" FromRole="Question" ToRole="Mediciner" />
           <NavigationProperty Name="User" Relationship="Self.FK_Question_User" FromRole="Question" ToRole="User" />

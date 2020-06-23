@@ -95,7 +95,7 @@
     <Property Name="Mid" Type="Int32" Nullable="false" />
     <Property Name="Qtime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Qcontent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Qanswer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Qanswer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Qstate" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Mediciner" Relationship="Self.FK_Question_Mediciner" FromRole="Question" ToRole="Mediciner" />
     <NavigationProperty Name="User" Relationship="Self.FK_Question_User" FromRole="Question" ToRole="User" />
