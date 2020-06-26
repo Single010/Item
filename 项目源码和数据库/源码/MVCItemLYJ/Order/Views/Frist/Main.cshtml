@@ -11,6 +11,7 @@
 
 <link href="~/Content/main.css" rel="stylesheet" />
 <link href="~/Content/FindMed.css" rel="stylesheet" />
+
 @*分割线*@
 <div class="fg"></div>
 
@@ -148,13 +149,13 @@
         @foreach (var item in hos.Take(1))
         {
             <li flag="selected" class="active" name="frist">
-                @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name= item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneAdds" })
+                @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name = item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneAdds" })
             </li>
         }
-        @foreach (var item in hos.Select(s=>new {s.Address}).Distinct().Take(10).Skip(1))
+        @foreach (var item in hos.Select(s => new { s.Address }).Distinct().Take(10).Skip(1))
         {
             <li flag="selected">
-                @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name= item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+                @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name = item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
 
             </li>
         }
@@ -177,6 +178,7 @@
             <li class="list-group-item">每位医生的预约时间不同</li>
             <li class="list-group-item">请提前预约</li>
         </ul>
+        <lable>已预约人数:</lable>
     </div>
 
 </div>
@@ -198,4 +200,5 @@
     </script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Order.Models;
+using Order.Filter;
 
 namespace Order.Controllers
 {
@@ -89,6 +90,7 @@ namespace Order.Controllers
 
 
 
+        [Login]
         /// <summary>
         /// 用户：我的预约
         /// </summary>
@@ -132,7 +134,7 @@ namespace Order.Controllers
             }
         }
 
-
+        [Login]
         public ActionResult Question(int pageIndex = 1, int pageCount = 4)
         {
             User user = Session["user"] as User;

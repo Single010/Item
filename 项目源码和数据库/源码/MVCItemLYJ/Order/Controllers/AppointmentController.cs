@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Order.Models;
+using Order.Filter;
 
 namespace Order.Controllers
 {
@@ -23,12 +24,13 @@ namespace Order.Controllers
         //    return RedirectToAction("FindMed");
         //}
 
-          /// <summary>
-          /// 添加预约
-          /// </summary>
-          /// <param name="id"></param>
-          /// <param name="time"></param>
-          /// <returns></returns>
+        [Login]
+        /// <summary>
+        /// 添加预约
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public ActionResult Add(int? id,DateTime time)
         {
 
@@ -76,7 +78,8 @@ namespace Order.Controllers
         }
 
 
-
+        [Login]
+        ///问诊
         public ActionResult Ques(string Mid,string Qcontent)
         {
             List<Question> que = db.Question.ToList();
