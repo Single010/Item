@@ -29,8 +29,8 @@
     <Property Name="Uid" Type="int" Nullable="false" />
     <Property Name="Mid" Type="int" Nullable="false" />
     <Property Name="Aid" Type="int" Nullable="false" />
-    <Property Name="Ctime" Type="datetime" Nullable="false" />
-    <Property Name="Comments" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Ctime" Type="datetime" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="100" />
     <Property Name="Cstate" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Dept">

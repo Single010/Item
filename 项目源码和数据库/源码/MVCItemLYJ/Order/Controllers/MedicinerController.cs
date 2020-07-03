@@ -205,5 +205,119 @@ namespace Order.Controllers
             db.SaveChanges();
             return RedirectToAction("Ords", "Mediciner", new { id = med2.Mid });
         }
+
+        /// <summary>
+        /// 医生：我的预约
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult MyOrd(int pageIndex = 1, int pageCount = 4)
+        {
+            Mediciner med = Session["med"] as Mediciner;
+            //总行数
+            int totalCount = db.Appointment.OrderBy(p => p.Aid).Where(p => p.Mid == med.Mid).Count();
+            //总页数
+            double totalPage = Math.Ceiling((double)totalCount / pageCount);
+            //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
+            List<Appointment> app = db.Appointment.OrderBy(p => p.Aid)
+                 .Where(p => p.Mid == med.Mid).ToList()
+                 .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.pageCount = pageCount;
+            ViewBag.totalCount = totalCount;
+            ViewBag.totalPage = totalPage;
+            ViewBag.app = app;
+            return View();
+        }
+
+
+        /// <summary>
+        /// 结束预约
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EndApp(int? id)
+        {
+            Mediciner med = Session["med"] as Mediciner;
+            Appointment app = db.Appointment.Find(id);
+            app.Astate = 1;
+            Comment com = new Comment()
+            {
+                Mid = med.Mid,
+                Uid = app.User.Uid,
+                Aid = app.Aid,
+                Cstate = 0,
+            };
+            db.Comment.Add(com);
+            db.SaveChanges();
+            return RedirectToAction("MyOrd", "Mediciner");
+        }
+
+        /// <summary>
+        /// 医生：我的评论
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageCount"></param>
+        /// <returns></returns>
+        public ActionResult MedCom(int pageIndex = 1, int pageCount = 4)
+        {
+            Mediciner med = Session["med"] as Mediciner;
+            //总行数
+            int totalCount = db.Comment.OrderBy(p => p.Cid).Where(p => p.Mid == med.Mid).Count();
+            //总页数
+            double totalPage = Math.Ceiling((double)totalCount / pageCount);
+            //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
+            List<Comment> com = db.Comment.OrderBy(p => p.Cid)
+                 .Where(p => p.Mid == med.Mid).ToList()
+                 .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.pageCount = pageCount;
+            ViewBag.totalCount = totalCount;
+            ViewBag.totalPage = totalPage;
+            ViewBag.com = com;
+            return View();
+        }
+
+        /// <summary>
+        /// 医生：我的问诊
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageCount"></param>
+        /// <returns></returns>
+        public ActionResult Ques(int pageIndex = 1, int pageCount = 4)
+        {
+            Mediciner med = Session["med"] as Mediciner;
+            //总行数
+            int totalCount = db.Question.OrderBy(p => p.Qid).Where(p => p.Mid == med.Mid).Count();
+            //总页数
+            double totalPage = Math.Ceiling((double)totalCount / pageCount);
+            //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
+            List<Question> ques = db.Question.OrderBy(p => p.Qid)
+                 .Where(p => p.Mid == med.Mid).ToList()
+                 .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.pageCount = pageCount;
+            ViewBag.totalCount = totalCount;
+            ViewBag.totalPage = totalPage;
+            ViewBag.ques = ques;
+            return View();
+        }
+
+        /// <summary>
+        /// 问诊回复
+        /// </summary>
+        /// <param name="ques"></param>
+        /// <returns></returns>
+        public ActionResult QuesAnswer(Question ques)
+        {
+            Question ques1 = db.Question.Find(ques.Qid);
+            ques1.Qanswer = ques.Qanswer;
+            ques1.Qstate = 1;
+            db.SaveChanges();
+            return RedirectToAction("Ques", "Mediciner");
+        }
+
+
+
+       
     }
 }

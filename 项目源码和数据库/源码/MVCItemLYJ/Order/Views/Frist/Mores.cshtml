@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @using Order.Models;
+    @{
+        User user = Session["user"] as User;
+    }
+    <link href="~/Content/Hand.css" rel="stylesheet" />
+</head>
+<body style="margin:0px;padding:0px">
+    @*灰色登录条*@
+    <div class="gh-nav">
+        <div class="container g-clear">
+            <div class="g-left" id="">
+                <span class="text">@user.Uname 您好！</span>
+                <a href="/Users/Logout">退出</a>
+            </div>
+
+
+            <div class="g-right">
+
+                <a href="text">
+                    下载APP
+                    <span>
+                        <img src="https://static.guahao.cn/front/portal-pc-static/img/index-appQRcode.png?v=20170505" alt="" style="display: none;">
+                    </span>
+                </a>
+                <span class="line">|</span>
+                <a href="">快速取消预约</a>
+                <span class="line">|</span>
+                <a href="">客服中心</a>
+                <span class="line">|</span>
+                <a href="">微医云</a>
+                <span class="line">|</span>
+                <a href="">药品信息</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    <div id="footer">
+        <div id="button">
+            <ul>
+                <li><a href="#">服务条款</a></li>
+                <li>丨</li>
+                <li><a href="#">隐私政策</a></li>
+                <li>丨</li>
+                <li><a href="#">儿童政策</a></li>
+                <li>丨</li>
+                <li><a href="#">意见反馈</a></li>
+                <li>丨</li>
+                <li><a href="#">投诉</a></li>
+            </ul>
+            <div class="number">快医公司版权所有©199X-20X9XXXX科技有限公司运营：浙网文[20XX]3X0X-X6X号</div>
+            <div class="report">违法和不良信息举报电话：0xx1-xx3xx5x6 举报邮箱：1373xxxxxx@qq.com </div>
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

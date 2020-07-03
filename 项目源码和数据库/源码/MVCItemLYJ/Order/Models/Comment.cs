@@ -18,7 +18,7 @@ namespace Order.Models
         public int Uid { get; set; }
         public int Mid { get; set; }
         public int Aid { get; set; }
-        public System.DateTime Ctime { get; set; }
+        public Nullable<System.DateTime> Ctime { get; set; }
         public string Comments { get; set; }
         public int Cstate { get; set; }
     

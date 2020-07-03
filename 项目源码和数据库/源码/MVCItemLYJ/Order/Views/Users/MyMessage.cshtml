@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "MyMessage";
+    Layout = "~/Views/Users/UIndex_LayoutPage1.cshtml";
+}
+
+@using Order.Models;
+@{
+    User user = ViewBag.Use as User;
+}
+
+<link href="~/Content/Main.css" rel="stylesheet" />
+<style type="text/css">
+    .Mainbody {
+        background-color: white;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        height: 500px;
+        width: auto;
+        border-radius: 10px;
+        opacity: 0.9;
+    }
+</style>
+<div class="Mainbody" style="position:relative">
+    <div style="font-size:24px;text-align:center;position:absolute;top:30px;left:500px" >我的信息</div>
+    <div style="position:relative; width:90%;height:450px;border:1px solid white;margin:0 auto;">
+        <div style="float:left;margin-left:250px;margin-top:50px">
+            <div class="form-group" style="margin-top:40px;">
+                <label for="Uloginname" class="col-form-label">登录名:</label>
+                <input type="text" readonly="readonly" id="Uloginname" name="Uloginname" class="form-control" value="@user.Uloginname" />
+            </div>
+            <div class="form-group" style="margin-top:40px;">
+                <label for="Uname" class="col-form-label">姓名:</label>
+                <input type="text" readonly="readonly" id="Uname" name="Uname" class="form-control" value="@user.Uname" />
+            </div>
+            <div class="form-group" style="margin-top:40px;">
+                <label for="Upwd" class="col-form-label">密码:</label>
+                <input type="password" readonly="readonly" id="Upwd" name="Upwd" class="form-control" value="@user.Upwd" />
+            </div>
+        </div>
+        <div style="float:right;margin-right:250px;margin-top:50px">
+            <div class="form-group" style="margin-top:40px;">
+                <label for="Gender" class="col-form-label">性别:</label>
+                <input type="text" readonly="readonly" id="Gender" name="Gender" class="form-control" value="@user.Gender" />
+            </div>
+            <div class="form-group" style="margin-top:40px;">
+                <label for="Uidentity" class="col-form-label">身份证:</label>
+                <input type="text" readonly="readonly" id="Uidentity" name="Uidentity" class="form-control" value="@user.Uidentity" />
+            </div>
+            <div class="form-group" style="margin-top:40px;">
+                <label for="Mobile" class="col-form-label">电话:</label>
+                <input type="text" readonly="readonly" id="Mobile" name="Mobile" class="form-control" value="@user.Mobile" />
+            </div>
+        </div>
+        <a href="" class="btn btn-success" style="position:absolute;top:400px;left:45%" data-toggle="modal" data-target="#exampleModal">修改</a>
+    </div>
+</div>
+
+@*修改信息*@
+<div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">修改信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Users/EditMyMessage" method="post" id="form1">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="Uid" name="Uid" value="@user.Uid">
+                    </div>
+                    <div class="form-group">
+                        <label for="Uloginname" class="col-form-label">登录名:</label>
+                        <input type="text" class="form-control" id="Uloginname" name="Uloginname" value="@user.Uloginname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Uname" class="col-form-label">姓名:</label>
+                        <input type="text" class="form-control" id="Uname" name="Uname" value="@user.Uname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Upwd" class="col-form-label">密码:</label>
+                        <input type="text" class="form-control" id="Upwd" name="Upwd" value="@user.Upwd">
+                    </div>
+                    <div class="form-group">
+                        <label for="Gender" class="col-form-label">性别:</label>
+                        <select name="Gender" id="Gender" class="form-control">
+                            @if (user.Gender == "男")
+                            {
+                                <option value="男" selected>男</option>
+                                <option value="女">女</option>
+                            }
+                            else
+                            {
+                                <option value="女" selected>女</option>
+                                <option value="男">男</option>
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Uidentity" class="col-form-label">身份证:</label>
+                        <input type="text" class="form-control" id="Uidentity" name="Uidentity" value="@user.Uidentity">
+                    </div>
+                    <div class="form-group">
+                        <label for="Mobile" class="col-form-label">电话:</label>
+                        <input type="text" class="form-control" id="Mobile" name="Mobile" value="@user.Mobile">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" id="save">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $("#save").click(function () {
+            $("#form1").submit();
+        })
+    </script>
+}

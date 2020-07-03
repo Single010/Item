@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdiminController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\FristController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicinerController.cs" />
@@ -190,6 +191,7 @@
     <Content Include="Content\Images\three.png" />
     <Content Include="Content\Images\two.png" />
     <Content Include="Content\Images\准备给病人做手术的医生图片_彼岸图网.jpg" />
+    <Content Include="Content\Images\刚做完手术的医生图片_彼岸图网.jpg" />
     <Content Include="Content\Images\动画医生.jpg" />
     <Content Include="Content\Images\动画医生2.jpg" />
     <Content Include="Content\Images\医用工具图片_彼岸图网.jpg" />
@@ -226,6 +228,11 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="后台主页\css\all.css" />
+    <Content Include="后台主页\css\bootstrap.min.css" />
+    <Content Include="后台主页\css\style.css" />
+    <Content Include="后台主页\css\style1.css" />
+    <Content Include="后台主页\index.html" />
     <Content Include="新建文件夹\css\main.css" />
     <Content Include="新建文件夹\css\style.css" />
     <Content Include="新建文件夹\img\left.png" />
@@ -311,6 +318,27 @@
     <Content Include="Views\Frist\FindMed.cshtml" />
     <Content Include="Views\Frist\FindHos.cshtml" />
     <Content Include="Views\Users\Question.cshtml" />
+    <Content Include="Views\Comment\UserComment.cshtml" />
+    <Content Include="Views\Mediciner\MyOrd.cshtml" />
+    <Content Include="Views\Mediciner\MedCom.cshtml" />
+    <Content Include="Views\Mediciner\Ques.cshtml" />
+    <Content Include="Views\Users\MyMessage.cshtml" />
+    <Content Include="后台主页\webfonts\fa-brands-400.eot" />
+    <Content Include="后台主页\webfonts\fa-brands-400.ttf" />
+    <Content Include="后台主页\webfonts\fa-brands-400.woff" />
+    <Content Include="后台主页\webfonts\fa-brands-400.woff2" />
+    <Content Include="后台主页\webfonts\fa-regular-400.eot" />
+    <Content Include="后台主页\webfonts\fa-regular-400.ttf" />
+    <Content Include="后台主页\webfonts\fa-regular-400.woff" />
+    <Content Include="后台主页\webfonts\fa-regular-400.woff2" />
+    <Content Include="后台主页\webfonts\fa-solid-900.eot" />
+    <Content Include="后台主页\webfonts\fa-solid-900.ttf" />
+    <Content Include="后台主页\webfonts\fa-solid-900.woff" />
+    <Content Include="后台主页\webfonts\fa-solid-900.woff2" />
+    <Content Include="Views\Adimin\TC.cshtml" />
+    <Content Include="Views\Frist\Mores.cshtml" />
+    <Content Include="Views\Frist\More.cshtml" />
+    <Content Include="Views\Frist\FindMeds.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

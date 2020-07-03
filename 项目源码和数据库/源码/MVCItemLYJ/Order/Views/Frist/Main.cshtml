@@ -27,13 +27,13 @@
                         <ul class="assistant">
                             @foreach (var item1 in dept.Where(p => p.Pdid == item.Did).Take(3))
                             {
-                                <li><a href="">@item1.Dname</a></li>
+                                <li><a href="/Frist/FindID/@item1.Did">@item1.Dname</a></li>
                                 <span>|</span>
                             }
                         </ul>
                     </li>
                 }
-                <li class="main"><span class="glyphicon glyphicon-plus"></span><span>更多科室</span></li>
+                <li class="main"><span class="glyphicon glyphicon-plus"></span><a href="/Frist/More"><span>更多科室</span></a></li>
             </ul>
         </div>
 
@@ -123,7 +123,7 @@
                 @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneDept" })
             </li>
         }
-        @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Take(15).Skip(1))
+        @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Skip(1))
         {
             <li flag="selected">
                 @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
@@ -131,7 +131,7 @@
             </li>
         }
         <li flag="selected">
-            <a href="#">更多科室>></a>
+            @*<a href="/Frist/More">更多科室>></a>*@
         </li>
     </ul>
     <div id="myTabContent" class="tab-content table-bordered" style="border-top:none">
@@ -152,7 +152,7 @@
                 @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name = item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneAdds" })
             </li>
         }
-        @foreach (var item in hos.Select(s => new { s.Address }).Distinct().Take(10).Skip(1))
+        @foreach (var item in hos.Select(s => new { s.Address }).Distinct().Skip(1))
         {
             <li flag="selected">
                 @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name = item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
@@ -160,7 +160,7 @@
             </li>
         }
         <li flag="selected">
-            <a href="#">更多医院>></a>
+            @*<a href="#">更多医院>></a>*@
         </li>
     </ul>
     <div id="myTabContent" class="tab-content table-bordered" style="border-top:none">

@@ -34,8 +34,8 @@
           <Property Name="Uid" Type="int" Nullable="false" />
           <Property Name="Mid" Type="int" Nullable="false" />
           <Property Name="Aid" Type="int" Nullable="false" />
-          <Property Name="Ctime" Type="datetime" Nullable="false" />
-          <Property Name="Comments" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ctime" Type="datetime" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="100" />
           <Property Name="Cstate" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Dept">
@@ -290,8 +290,8 @@
           <Property Name="Uid" Type="Int32" Nullable="false" />
           <Property Name="Mid" Type="Int32" Nullable="false" />
           <Property Name="Aid" Type="Int32" Nullable="false" />
-          <Property Name="Ctime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Comments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ctime" Type="DateTime" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Cstate" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Appointment" Relationship="Self.FK_Comment_Appointment" FromRole="Comment" ToRole="Appointment" />
           <NavigationProperty Name="Mediciner" Relationship="Self.FK_Comment_Mediciner" FromRole="Comment" ToRole="Mediciner" />

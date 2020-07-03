@@ -458,6 +458,11 @@ namespace Order.Controllers
             return RedirectToAction("TwoDept","Adimin");
         }
 
+        public ActionResult TC()
+        {
+            return View();
+        }
+
 
         /// <summary>
         /// 退出系统

@@ -134,6 +134,12 @@ namespace Order.Controllers
             }
         }
 
+        /// <summary>
+        /// 我的问诊
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageCount"></param>
+        /// <returns></returns>
         [Login]
         public ActionResult Question(int pageIndex = 1, int pageCount = 4)
         {
@@ -152,6 +158,37 @@ namespace Order.Controllers
             ViewBag.totalPage = totalPage;
             ViewBag.ques = ques;
             return View();
+        }
+
+        [Login]
+        /// <summary>
+        /// 我的信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult MyMessage()
+        {
+            User user = Session["user"] as User;
+            User Use = db.User.Find(user.Uid);
+            ViewBag.Use = Use;
+            return View();
+        }
+
+
+        /// <summary>
+        /// 修改我的信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EditMyMessage(User user)
+        {
+            User Use = db.User.Find(user.Uid);
+            Use.Uloginname = user.Uloginname;
+            Use.Uname = user.Uname;
+            Use.Upwd = user.Upwd;
+            Use.Gender = user.Gender;
+            Use.Uidentity = user.Uidentity;
+            Use.Mobile = user.Mobile;
+            db.SaveChanges();
+            return RedirectToAction("MyMessage", "Users");
         }
     }
 }

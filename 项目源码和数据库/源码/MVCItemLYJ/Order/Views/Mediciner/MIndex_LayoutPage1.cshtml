@@ -59,9 +59,9 @@
     <div class="navigation" style="margin-left:200px; margin-top:50px;margin-bottom:30px;">
         <div class="home-menu-ctn">
             <ul class="main-menu-nav">
-                <li><a href="">我的预约</a></li>
-                <li><a href="">我的评论</a></li>
-                <li><a href="">我的问诊</a></li>
+                <li><a href="/Mediciner/MyOrd">我的预约</a></li>
+                <li><a href="/Mediciner/MedCom">我的评论</a></li>
+                <li><a href="/Mediciner/Ques">我的问诊</a></li>
                 <li><a href="~/Mediciner/MedMessageEdit/@med.Mid">我的信息</a></li>
                 <li><a href="~/Mediciner/Ords/@med.Mid">预约设置</a></li>
             </ul>
@@ -103,12 +103,12 @@
 </html>
 
 <script type="text/javascript">
-      $(".main-menu-nav").children().children("a").hover(function () {
+    $(".main-menu-nav").children().children("a").click(function () {
           $(this).parents("li").css("background-color", "#80B9D6")
           $(this).parents("li").siblings("li").css("background-color", this.translate)
         }
     )
-    $(".main-menu-nav").children().children("a").hover(function () {
+    $(".main-menu-nav").children().children("a").click(function () {
         $(this).css("color", "white")
         $(this).parents("li").siblings("li").children("a").css("color", "black")
     })

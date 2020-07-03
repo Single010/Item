@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "MedCom";
+    Layout = "~/Views/Mediciner/MIndex_LayoutPage1.cshtml";
+}
+
+@using Order.Models;
+@{
+    List<Comment> com = ViewBag.com as List<Comment>;
+}
+<link href="~/Content/Main.css" rel="stylesheet" />
+<style type="text/css">
+    .Mainbody {
+        background-color: white;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        height: 500px;
+        width: auto;
+        border-radius: 10px;
+        opacity: 0.9;
+    }
+
+    .modal-backdrop {
+        display: none;
+    }
+</style>
+<div class="Mainbody">
+    <div style="width:50%;margin-top:50px;margin:0 auto;font-size:24px;text-align:center">我的评论</div>
+    <table class="table table-bordered table-hover" style="        border: 1px solid black;
+        margin-top: 20px;">
+        <thead class="bg-success text-white">
+            <tr>
+                <th>编号</th>
+                <th>用户</th>
+                <th>预约编号</th>
+                <th>评论时间</th>
+                <th>内容</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        @foreach (var item in com)
+        {
+            <tr>
+                <td>@item.Cid</td>
+                <td>@item.User.Uname</td>
+                <td>@item.Aid</td>
+                <td>@item.Ctime</td>
+                <td>@item.Comments</td>
+                @if (item.Cstate == 0)
+                {
+                    <td style="color:red">未评论</td>
+                }
+                else
+                {
+                    <td style="color:forestgreen">已评论</td>
+                }
+
+            </tr>
+        }
+    </table>
+</div>
+
+@*分页*@
+<div style="        position: absolute;
+        top: 500px;
+        height: auto;
+        width: 1100px;">
+    <div classs="row">
+        <div class="col-lg-8">
+            <label style="color:black;">总共 @ViewBag.totalCount 行</label>
+            <select onchange="window.location = this.value;">
+                @{
+                    int[] count = new[] { 2, 3, 4, 5 };
+                }
+                @foreach (var item in count)
+                {
+                    if (item.Equals(ViewBag.pageCount))
+                    {
+                        <option value="/Mediciner/MedCom?pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                    }
+                    else
+                    {
+                        <option value="/Mediciner/MedCom?pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                    }
+
+                }
+            </select>
+        </div>
+        <div class="col-lg-4">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="/Mediciner/MedCom?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a></li>
+
+                    @if (@ViewBag.pageIndex > 1)
+                    {
+                        <li class="page-item"><a class="page-link" href="/Mediciner/MedCom?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+                    }
+
+                    <li class="page-item"><a class="page-link" href="#">@ViewBag.pageIndex</a></li>
+
+                    @if (@ViewBag.pageIndex < @ViewBag.totalPage)
+                    {
+                        <li class="page-item"><a class="page-link" href="/Mediciner/MedCom?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
+                    }
+
+                    <li class="page-item"><a class="page-link" href="/Mediciner/MedCom?pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>@*分页尾*@
+

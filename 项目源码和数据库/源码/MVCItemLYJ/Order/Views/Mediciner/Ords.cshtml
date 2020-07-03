@@ -8,7 +8,7 @@
 <link href="~/Content/main.css" rel="stylesheet" />
 <style type="text/css">
     .Mainbody {
-        background-color: #80B9D6;
+        background-color: white;
         opacity: 0.9;
         height: 500px;
         width: auto;
@@ -17,26 +17,26 @@
 </style>
 <div class="Mainbody">
     <div style="width:50%;margin-top:50px;margin:0 auto;font-size:24px;text-align:center">预约设置</div>
-    <form action="" method="post" id="form1" enctype="multipart/form-data" style="position:relative; width:90%;height:450px;border:1px solid white;margin:0 auto;">
+    <form action="" method="post" id="form1" enctype="multipart/form-data" style="position:relative; width:90%;height:450px;border:1px solid black;margin:0 auto;">
         <div style="float:left;margin-left:250px;margin-top:50px">
             <div class="form-group">
                 @Html.Hidden("Mid")
                 <label for="MtimeA" class="col-form-label">预约时段一:</label>
-                <label style="color:white">@Model.MtimeA</label>
+                <label style="color:red">@Model.MtimeA</label>
             </div>
             <div class="form-group">
                 <label for="MtimeB" class="col-form-label">预约时段2:</label>
-                <label style="color:white">@Model.MtimeB</label>
+                <label style="color:red">@Model.MtimeB</label>
             </div>
             <div class="form-group">
                 <label for="MtimeC" class="col-form-label">预约时段3:</label>
-                <label style="color:white">@Model.MtimeC</label>
+                <label style="color:red">@Model.MtimeC</label>
             </div>
         </div>
         <div style="float:right;margin-right:250px;margin-top:50px">
             <div class="form-group">
                 <label for="Mcount" class="col-form-label">预约次数:</label>
-                <label style="color:white">@Model.Mcount</label>
+                <label style="color:red">@Model.Mcount</label>
             </div>
         </div>
         <a href="~/Mediciner/Ord/@Model.Mid" class="btn btn-success" style="position:absolute;top:400px;left:45%">修改</a>

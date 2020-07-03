@@ -42,8 +42,11 @@ namespace Order.Controllers
             Mediciner med = db.Mediciner.Find(id);
 
             //查询对应时间、医生、用户对应的预约条数
-            List<Appointment> App1 = db.Appointment.Where(p => (p.Mid == id) && (p.Uid == user.Uid) && (p.Ttime == time)).ToList();
+            List<Appointment> App1 = db.Appointment.Where(p => (p.Mid == id) && (p.Uid == user.Uid) && (p.Atime == time)).ToList();
             int num1 = App1.Count();
+
+            if (time>DateTime.Now)
+            {
             //如果此时间段的预约条数小于医生设置的次数
             if (med.Mcount>num)
             {
@@ -54,8 +57,8 @@ namespace Order.Controllers
                     {
                         Mid = med.Mid,
                         Uid = user.Uid,
-                        Atime = DateTime.Now,
-                        Ttime = time,
+                        Atime = time,
+                        Ttime = DateTime.Now,
                         Astate = 0,
                         Anun = med.Mid,
                     };
@@ -73,6 +76,11 @@ namespace Order.Controllers
             else
             {
                 return Content("<script>alert('此时间段已没有预约号!');history.go(-1)</script>");
+            }
+          }
+            else
+            {
+                return Content("<script>alert('此时间段已失效!');history.go(-1)</script>");
             }
 
         }

@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "FindMeds";
+    Layout = "~/Views/Frist/Mores.cshtml";
+}
+@using Order.Models
+@{
+    List<Mediciner> med = ViewBag.med as List<Mediciner>;
+    Dept dept = ViewBag.dept as Dept;
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+    <style type="text/css">
+        .A1 p {
+            margin-top: 1px;
+            text-align: center;
+        }
+
+            .A1 p a {
+                height: 25px;
+                line-height: 15px;
+                width: 89px;
+            }
+    </style>
+<div style="margin-left:50px;">
+    <img src="~/Content/Images/标志.jpg" />
+</div>
+<div style="height:5px;background-color:#2B73CC"></div>
+<div style="width:80%;margin:0 auto;height:600px;margin-top:20px;">
+    <div style="height:35px;background-color:#F8F8F8;line-height:35px;">
+        <a href="/Frist/Main" style="        color: #2B73CC;
+        text-decoration: none;margin-left:15px;
+        font-size: 14px;">首页</a><lable>></lable><label style="font-size:14px;">@dept.Dname</label>
+    </div>
+    <div style="margin-top:15px;">
+        <p style="margin-left:10px;font-size:26px">相关医生</p>
+
+        <div style="display:flex">
+            @foreach (var item in med)
+            {
+                <div class="row" style="position: relative;">
+                    <div class="col-sm-5 col-md-12">
+                        <div class="thumbnail" style="margin-left: 15px; margin-right: 15px;">
+                            @if (item.MPic == "" || item.MPic == null)
+                            {
+                                <img src="~/Content/Images/默认.jpg" style="width:242px;height:200px" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/HosImage/@item.MPic" style="width:242px;height:200px" />
+                            }
+                            <div class="caption">
+                                <label style="font-size:16px;">@item.Mname</label><label style="font-size:12px; font-weight:normal;">(@item.Titles)</label>
+                                <p>@item.Hospital.Hname</p>
+                                <h6>@item.Mspec</h6>
+                                <p><a href="javascript:void(0);" class="btn btn-primary A" role="button">预约</a> <a href="javascript:void(0);" class="btn btn-default Q" role="button">问诊</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*预约时间*@
+                    <div class="A1" style="position:absolute;top:210px;left:0;margin-left: 30px; margin-right: 30px;height:140px;width:242px;display:none;background-color:white">
+                        <span class="glyphicon glyphicon-remove A2"></span>
+                        @if (item.MtimeA != null)
+                        {
+                            <p><a href="~/Appointment/Add/@item.Mid?time=@item.MtimeA" class="btn btn-primary" role="button">@item.MtimeA</a></p>
+                        }
+                        @if (item.MtimeB != null)
+                        {
+                            <p><a href="~/Appointment/Add/@item.Mid?time=@item.MtimeB" class="btn btn-primary" role="button">@item.MtimeB</a></p>
+                        }
+                        @if (item.MtimeC != null)
+                        {
+                            <p><a href="~/Appointment/Add/@item.Mid?time=@item.MtimeC" class="btn btn-primary" role="button">@item.MtimeC</a></p>
+                        }
+
+                    </div>
+
+                    @*问诊*@
+                    <div class="Ques" style="position:absolute;top:210px;left:0;margin-left: 30px; margin-right: 30px;height:140px;width:242px;display:none;background-color:white">
+                        <span class="glyphicon glyphicon-remove A6"></span>
+                        <form action="~/Appointment/Ques" method="post" id="form1">
+                            <input type="hidden" class="form-control" id="Mid" name="Mid" value="@item.Mid" style="width:20%" />
+                            <label for="Qcontent" class="col-form-label">问题:</label>
+                            <input type="text" class="form-control" id="Qcontent" name="Qcontent">
+                            <button type="submit" class="btn btn-primary" id="save">提交</button>
+                        </form>
+
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+
+    @*分页*@
+    <div style=" 
+        height: auto;
+        width: 1100px;">
+        <div classs="row">
+            <div class="col-lg-8">
+                <label style="color:black;">总共 @ViewBag.totalCount 行</label>
+                <select onchange="window.location = this.value;">
+                    @{
+                        int[] count = new[] { 2,3,4,5};
+                    }
+                    @foreach (var item in count)
+                    {
+                        if (item.Equals(ViewBag.pageCount))
+                        {
+                            <option value="/Frist/FindMeds?pageIndex=@ViewBag.pageIndex&pageCount=@item" selected>@item</option>
+                        }
+                        else
+                        {
+                            <option value="/Frist/FindMeds?pageIndex=@ViewBag.pageIndex&pageCount=@item">@item</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="/Frist/FindMeds?pageIndex=1&pageCount=@ViewBag.pageCount">首页</a></li>
+
+                        @if (@ViewBag.pageIndex > 1)
+                        {
+                            <li class="page-item"><a class="page-link" href="/Frist/FindMeds?pageIndex=@(ViewBag.pageIndex-1)&pageCount=@ViewBag.pageCount">上一页</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item disabled"><a class="page-link" href="#">上一页</a></li>
+                        }
+
+                        <li class="page-item"><a class="page-link" href="#">@ViewBag.pageIndex</a></li>
+
+                        @if (@ViewBag.pageIndex < @ViewBag.totalPage)
+                        {
+                            <li class="page-item"><a class="page-link" href="/Frist/FindMeds?pageIndex=@(ViewBag.pageIndex+1)&pageCount=@ViewBag.pageCount">下一页</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item disabled"><a class="page-link" href="#">下一页</a></li>
+                        }
+
+                        <li class="page-item"><a class="page-link" href="/Frist/FindMeds?pageIndex=@ViewBag.totalPage&pageCount=@ViewBag.pageCount">末页</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>@*分页尾*@
+</div>
+<script type="text/javascript">
+    $(".A").click(function () {
+        $(this).parent().parent().parent().parent().siblings(".A1").show();
+    })
+    $(".A2").click(function () {
+        $(this).parent(".A1").hide();
+    })
+
+    $(".Q").click(function () {
+        $(this).parent().parent().parent().parent().siblings(".Ques").show();
+    })
+    $(".A6").click(function () {
+        $(this).parent(".Ques").hide();
+    })
+    $("#save").click(function () {
+        $("#form1").submit();
+    })
+</script>
