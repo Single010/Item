@@ -30,6 +30,7 @@ namespace Order.Controllers
         {
             List<Mediciner> findmed = db.Mediciner.Where(p => p.Did == id).Take(5).ToList();
             return PartialView(findmed);
+
         }
 
         public ActionResult FindHos(string name)
@@ -83,6 +84,12 @@ namespace Order.Controllers
        
         }
 
+
+
+        /// <summary>
+        /// 更多科室
+        /// </summary>
+        /// <returns></returns>
         [Login]
         public ActionResult More()
         {
@@ -90,5 +97,58 @@ namespace Order.Controllers
             ViewBag.dept = dept;
             return View();
         }
+
+        /// <summary>
+        /// 更多医院
+        /// </summary>
+        /// <returns></returns>
+        [Login]
+        public ActionResult MoreHos()
+        {
+            List<Hospital> hos = db.Hospital.ToList();
+            ViewBag.hos = hos;
+            return View();
+        }
+
+
+        /// <summary>
+        /// 进入医院查看医院医生
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult HosMed(int? id)
+        {
+            List<Mediciner> med = db.Mediciner.Where(p => p.Hid == id).ToList();
+            ViewBag.med = med;
+            return View();
+        }
+
+        [Login]
+        /// <summary>
+        /// 全局搜索
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult FindHosName(string name)
+        {
+            if (name!= "" && name!=null)
+            {
+                List<Hospital> hos = db.Hospital.Where(p => p.Hname.Contains(name)).ToList();
+                if (hos.Count() == 0)
+                {
+                    return Content("<script>alert('没有查询到此医院的信息');history.go(-1)</script>");
+                }
+                else
+                {
+                    ViewBag.hos = hos;
+                    return View();
+                }
+            }
+            else
+            {
+                return Content("<script>alert('请输入要查询的医院名称');history.go(-1)</script>");
+            }
+        }
+
+
+
     }
 }

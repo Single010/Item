@@ -339,6 +339,9 @@
     <Content Include="Views\Frist\Mores.cshtml" />
     <Content Include="Views\Frist\More.cshtml" />
     <Content Include="Views\Frist\FindMeds.cshtml" />
+    <Content Include="Views\Frist\MoreHos.cshtml" />
+    <Content Include="Views\Frist\HosMed.cshtml" />
+    <Content Include="Views\Frist\FindHosName.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

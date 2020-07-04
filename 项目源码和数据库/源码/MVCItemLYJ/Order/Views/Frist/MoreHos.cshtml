@@ -2,14 +2,12 @@
 @{
     Layout = null;
 }
-
-@using Order.Models
+@using Order.Models;
+@{
+    List<Hospital> hos = ViewBag.hos as List<Hospital>;
+}
 @{
     User user = Session["user"] as User;
-}
-<link href="~/Content/Hand.css" rel="stylesheet" />
-@{
-    List<Dept> dept = ViewBag.dept as List<Dept>;
 }
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
@@ -18,7 +16,16 @@
 @Scripts.Render("~/bundles/bootstrap")
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MoreHos</title>
+    <link href="~/Content/Hand.css" rel="stylesheet" />
+</head>
 <body style="margin:0;padding:0px">
+
     @*灰色登录条*@
     <div class="gh-nav">
         <div class="container g-clear">
@@ -53,23 +60,23 @@
     <div style="height:5px;background-color:#2B73CC"></div>
     <div style="width:80%;margin:0 auto;height:600px;margin-top:20px;">
         <div style="height:35px;background-color:#F8F8F8;line-height:35px;">
-            <a href="/Frist/Main" style="color: #2B73CC;text-decoration: none;margin-left:15px;font-size: 14px;">首页</a><lable>></lable><lable>更多科室</lable>
+            <a href="/Frist/Main" style="color: #2B73CC;text-decoration: none;margin-left:15px;font-size: 14px;">首页</a><lable>></lable><lable>更多医院</lable>
             <ul id="myTab" class="nav nav-tabs" style="display:flex;flex-flow:wrap">
-                @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Take(1))
+                @foreach (var item in hos.Take(1))
                 {
                     <li flag="selected" class="active" name="frist">
-                        @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneDept" })
+                        @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name = item.Address }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneAdds" })
                     </li>
                 }
-                @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Skip(1))
+                @foreach (var item in hos.Select(s => new { s.Address }).Distinct().Skip(1))
                 {
                     <li flag="selected">
-                        @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+                        @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name = item.Address }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
 
                     </li>
                 }
                 <li flag="selected">
-                    @*<a href="/Frist/More">更多科室>></a>*@
+                    @*<a href="#">更多医院>></a>*@
                 </li>
             </ul>
         </div>
@@ -98,32 +105,18 @@
             <div class="report">违法和不良信息举报电话：0xx1-xx3xx5x6 举报邮箱：1373xxxxxx@qq.com </div>
         </div>
     </div>
+
+
 </body>
+</html>
+
 <script type="text/javascript">
-    $(".A").click(function () {
-        $(this).parent().parent().parent().parent().siblings(".A1").show();
-    })
-    $(".A2").click(function () {
-        $(this).parent(".A1").hide();
-    })
-
-    $(".Q").click(function () {
-        $(this).parent().parent().parent().parent().siblings(".Ques").show();
-    })
-    $(".A6").click(function () {
-        $(this).parent(".Ques").hide();
-    })
-    $("#save").click(function () {
-        $("#form1").submit();
-    })
-
-    //初始化默认选中第一个
     $(function () {
         $("[flag='selected']").click(function () {
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
 
         });
-        $(".oneDept").click();
+        $(".oneAdds").click();
     })
 </script>

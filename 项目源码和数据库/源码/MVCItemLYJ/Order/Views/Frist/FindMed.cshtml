@@ -1,91 +1,107 @@
 ﻿@using Order.Models;
 @model List<Mediciner>
-    @{ 
-        Mediciner med = ViewBag.med as Mediciner;
-    }
+@{
+    Mediciner med = ViewBag.med as Mediciner;
+}
 
 <style type="text/css">
-    .A1 p{
-        margin-top:1px;
-        text-align:center;
+    .A1 p {
+        margin-top: 1px;
+        text-align: center;
     }
-        .A1 p a{
-         height:25px;
-         line-height:15px;
-        width:89px;
-    }
+
+        .A1 p a {
+            height: 25px;
+            line-height: 15px;
+            width: 89px;
+        }
 </style>
 
-@foreach (var item in Model)
+@if (Model.Count() == 0)
 {
-<div class="row" style="position: relative;">
-    <div class="col-sm-5 col-md-12">
-        <div class="thumbnail" style="margin-left: 15px; margin-right: 15px;">
-            @if (item.MPic == "" || item.MPic == null)
-            {
-                <img src="~/Content/Images/默认.jpg" style="width:242px;height:200px" />
-            }
-            else
-            {
-                <img src="~/Content/HosImage/@item.MPic" style="width:242px;height:200px" />
-            }
-            <div class="caption">
-                <label style="font-size:16px;">@item.Mname</label><label style="font-size:12px; font-weight:normal;">(@item.Titles)</label>
-                <p>@item.Hospital.Hname</p>
-                <h6>@item.Mspec</h6>
-                <p><a href="javascript:void(0);" class="btn btn-primary A" role="button">预约</a> <a href="javascript:void(0);" class="btn btn-default Q" role="button">问诊</a></p>
+    <div style="margin:0 auto;font-size:36px;margin-top:100px;">抱歉！没有找到该科室的医生信息</div>
+}
+else
+{
+    foreach (var item in Model)
+    {
+        <div class="row" style="position: relative;">
+            <div class="col-sm-5 col-md-12">
+                <div class="thumbnail" style="margin-left: 15px; margin-right: 15px;">
+                    @if (item.MPic == "" || item.MPic == null)
+                    {
+                        <img src="~/Content/Images/默认.jpg" style="width:242px;height:200px" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/HosImage/@item.MPic" style="width:242px;height:200px" />
+                    }
+                <div class="caption">
+                    <label style="font-size:16px;">@item.Mname</label><label style="font-size:12px; font-weight:normal;">(@item.Titles)</label>
+                    <p>@item.Hospital.Hname</p>
+                    <label style="font-size:13px;">@item.Dept.Dname</label><label style="font-size:12px; font-weight:normal;">@item.Mspec</label>
+                    <p><a href="javascript:void(0);" class="btn btn-primary A" role="button">预约</a> <a href="javascript:void(0);" class="btn btn-default Q" role="button">问诊</a></p>
+                </div>
+                </div>
+            </div>
+
+            @*预约时间*@
+            <div class="A1" style="position:absolute;top:210px;left:0;margin-left: 30px; margin-right: 30px;height:140px;width:242px;display:none;background-color:white">
+                <span class="glyphicon glyphicon-remove A2"></span>
+                @if (item.MtimeA != null)
+                {
+                    <p><a href="~/Appointment/Add/@item.Mid?time=@item.MtimeA" class="btn btn-primary" role="button">@item.MtimeA</a></p>
+                }
+                @if (item.MtimeB != null)
+                {
+                    <p><a href="~/Appointment/Add/@item.Mid?time=@item.MtimeB" class="btn btn-primary" role="button">@item.MtimeB</a></p>
+                }
+                @if (item.MtimeC != null)
+                {
+                    <p><a href="~/Appointment/Add/@item.Mid?time=@item.MtimeC" class="btn btn-primary" role="button">@item.MtimeC</a></p>
+                }
+
+            </div>
+
+            @*问诊*@
+            <div class="Ques" style="        position: absolute;
+        top: 210px;
+        left: 0;
+        margin-left: 30px;
+        margin-right: 30px;
+        height: 140px;
+        width: 242px;
+        display: none;
+        background-color: white">
+                <span class="glyphicon glyphicon-remove A6"></span>
+                <form action="~/Appointment/Ques" method="post" id="form1">
+                    <input type="hidden" class="form-control" id="Mid" name="Mid" value="@item.Mid" style="width:20%" />
+                    <label for="Qcontent" class="col-form-label">问题:</label>
+                    <input type="text" class="form-control" id="Qcontent" name="Qcontent">
+                    <button type="submit" class="btn btn-primary" id="save">提交</button>
+                </form>
+
             </div>
         </div>
-    </div>
 
-    @*预约时间*@
-    <div class="A1" style="position:absolute;top:210px;left:0;margin-left: 30px; margin-right: 30px;height:140px;width:242px;display:none;background-color:white">
-        <span class="glyphicon glyphicon-remove A2"></span>
-        @if (item.MtimeA != null)
-        {
-            <p><a href="~/Appointment/Add/@item.Mid?time=@item.MtimeA" class="btn btn-primary" role="button">@item.MtimeA</a></p>
-        }
-        @if (item.MtimeB != null)
-        {
-            <p><a href="~/Appointment/Add/@item.Mid?time=@item.MtimeB" class="btn btn-primary" role="button">@item.MtimeB</a></p>
-        }
-        @if (item.MtimeC != null)
-        {
-            <p><a href="~/Appointment/Add/@item.Mid?time=@item.MtimeC" class="btn btn-primary" role="button">@item.MtimeC</a></p>
-        }
-
-    </div>
-
-    @*问诊*@
-    <div class="Ques" style="position:absolute;top:210px;left:0;margin-left: 30px; margin-right: 30px;height:140px;width:242px;display:none;background-color:white">
-        <span class="glyphicon glyphicon-remove A6"></span>
-        <form action="~/Appointment/Ques" method="post" id="form1">
-            <input type="hidden" class="form-control" id="Mid" name="Mid" value="@item.Mid" style="width:20%"/>
-            <label for="Qcontent" class="col-form-label">问题:</label>
-            <input type="text" class="form-control" id="Qcontent" name="Qcontent">
-            <button type="submit" class="btn btn-primary" id="save">提交</button>
-        </form>
-
-    </div>
-</div>
-
+    }
 }
 
 <script type="text/javascript">
     $(".A").click(function () {
         $(this).parent().parent().parent().parent().siblings(".A1").show();
     })
-    $(".A2").click(function(){
+    $(".A2").click(function () {
         $(this).parent(".A1").hide();
     })
 
-     $(".Q").click(function () {
+    $(".Q").click(function () {
         $(this).parent().parent().parent().parent().siblings(".Ques").show();
-     })
-     $(".A6").click(function(){
+    })
+    $(".A6").click(function () {
         $(this).parent(".Ques").hide();
-     })
-        $("#save").click(function () {
+    })
+    $("#save").click(function () {
         $("#form1").submit();
     })
 </script>

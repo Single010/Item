@@ -3,13 +3,12 @@
     Layout = null;
 }
 
-@using Order.Models
+@using Order.Models;
+@{
+    List<Hospital> hos = ViewBag.hos as List<Hospital>;
+}
 @{
     User user = Session["user"] as User;
-}
-<link href="~/Content/Hand.css" rel="stylesheet" />
-@{
-    List<Dept> dept = ViewBag.dept as List<Dept>;
 }
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
@@ -18,7 +17,28 @@
 @Scripts.Render("~/bundles/bootstrap")
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HosMed</title>
+    <link href="~/Content/Hand.css" rel="stylesheet" />
+    <style type="text/css">
+        .A1 p {
+            margin-top: 1px;
+            text-align: center;
+        }
+
+            .A1 p a {
+                height: 25px;
+                line-height: 15px;
+                width: 89px;
+            }
+    </style>
+</head>
 <body style="margin:0;padding:0px">
+
     @*灰色登录条*@
     <div class="gh-nav">
         <div class="container g-clear">
@@ -53,31 +73,37 @@
     <div style="height:5px;background-color:#2B73CC"></div>
     <div style="width:80%;margin:0 auto;height:600px;margin-top:20px;">
         <div style="height:35px;background-color:#F8F8F8;line-height:35px;">
-            <a href="/Frist/Main" style="color: #2B73CC;text-decoration: none;margin-left:15px;font-size: 14px;">首页</a><lable>></lable><lable>更多科室</lable>
-            <ul id="myTab" class="nav nav-tabs" style="display:flex;flex-flow:wrap">
-                @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Take(1))
-                {
-                    <li flag="selected" class="active" name="frist">
-                        @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneDept" })
-                    </li>
-                }
-                @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Skip(1))
-                {
-                    <li flag="selected">
-                        @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
+            <a href="/Frist/Main" style="color: #2B73CC;text-decoration: none;margin-left:15px;font-size: 14px;">首页</a><lable>></lable><a href="/Frist/MoreHos" style="color: #2B73CC;text-decoration: none;font-size: 14px;">更多医院</a>
 
-                    </li>
-                }
-                <li flag="selected">
-                    @*<a href="/Frist/More">更多科室>></a>*@
-                </li>
-            </ul>
         </div>
         <div style="height:5px;background-color:#69B72F"></div>
 
     </div>
     <div id="myTabContent" class="tab-content table-bordered" style="border-top:none;border:1px solid #DCDDDC;margin:0 auto;margin-top:-500px;height:auto;width:80%;box-shadow:1px 1px 5px #888888;margin-bottom:20px;">
         <div class="tab-pane fade in active" id="change" style="display:flex;flex-flow:wrap;height:auto;">
+
+            @foreach (var item in hos)
+            {
+                <div class="row">
+                    <div class="col-sm-5 col-md-12">
+                        <div class="thumbnail" style="margin-left: 15px; margin-right: 15px;">
+                            @if (item.HImage == "" || item.HImage == null)
+                            {
+                                <img src="~/Content/Images/医院默认图.jpg" style="width:242px;height:200px" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/HosImage/@item.HImage" style="width:242px;height:200px" />
+                            }
+                            <div class="caption">
+                                <label style="font-size:16px;">@item.Hname</label><br />
+                                <label style="font-size:14px">@item.Grade</label><label style="font-size:12px; font-weight:normal;">(医院)</label>
+                                <p><a href="/Frist/HosMed/@item.Hid" class="btn btn-primary" role="button">进入</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
 
         </div>
     </div>
@@ -98,7 +124,12 @@
             <div class="report">违法和不良信息举报电话：0xx1-xx3xx5x6 举报邮箱：1373xxxxxx@qq.com </div>
         </div>
     </div>
+
+
 </body>
+</html>
+
+
 <script type="text/javascript">
     $(".A").click(function () {
         $(this).parent().parent().parent().parent().siblings(".A1").show();
@@ -115,15 +146,5 @@
     })
     $("#save").click(function () {
         $("#form1").submit();
-    })
-
-    //初始化默认选中第一个
-    $(function () {
-        $("[flag='selected']").click(function () {
-            $(this).siblings().removeClass("active");
-            $(this).addClass("active");
-
-        });
-        $(".oneDept").click();
     })
 </script>
