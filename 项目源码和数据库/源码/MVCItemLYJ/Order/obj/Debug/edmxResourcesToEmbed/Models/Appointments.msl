@@ -61,6 +61,7 @@
     <EntitySetMapping Name="Mediciner">
       <EntityTypeMapping TypeName="AppointmentsModel.Mediciner">
         <MappingFragment StoreEntitySet="Mediciner">
+          <ScalarProperty Name="Mstate" ColumnName="Mstate" />
           <ScalarProperty Name="Mid" ColumnName="Mid" />
           <ScalarProperty Name="Mloginname" ColumnName="Mloginname" />
           <ScalarProperty Name="Mpwd" ColumnName="Mpwd" />
@@ -94,6 +95,7 @@
     <EntitySetMapping Name="User">
       <EntityTypeMapping TypeName="AppointmentsModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Ustate" ColumnName="Ustate" />
           <ScalarProperty Name="Uid" ColumnName="Uid" />
           <ScalarProperty Name="Uloginname" ColumnName="Uloginname" />
           <ScalarProperty Name="Upwd" ColumnName="Upwd" />

@@ -59,7 +59,7 @@
     <Property Name="Hname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Grade" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="HImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HImage" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Mediciner" Relationship="Self.FK_Mediciner_Hospital" FromRole="Hospital" ToRole="Mediciner" />
   </EntityType>
   <EntityType Name="Mediciner">
@@ -79,12 +79,13 @@
     <Property Name="Mcount" Type="Int32" Nullable="false" />
     <Property Name="Hid" Type="Int32" Nullable="false" />
     <Property Name="Did" Type="Int32" Nullable="false" />
-    <Property Name="MPic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MPic" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Appointment" Relationship="Self.FK_Appointment_Mediciner" FromRole="Mediciner" ToRole="Appointment" />
     <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Mediciner" FromRole="Mediciner" ToRole="Comment" />
     <NavigationProperty Name="Dept" Relationship="Self.FK_Mediciner_Dept" FromRole="Mediciner" ToRole="Dept" />
     <NavigationProperty Name="Hospital" Relationship="Self.FK_Mediciner_Hospital" FromRole="Mediciner" ToRole="Hospital" />
     <NavigationProperty Name="Question" Relationship="Self.FK_Question_Mediciner" FromRole="Mediciner" ToRole="Question" />
+    <Property Name="Mstate" Type="Int32" />
   </EntityType>
   <EntityType Name="Question">
     <Key>
@@ -114,6 +115,7 @@
     <NavigationProperty Name="Appointment" Relationship="Self.FK_Appointment_User" FromRole="User" ToRole="Appointment" />
     <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_User" FromRole="User" ToRole="Comment" />
     <NavigationProperty Name="Question" Relationship="Self.FK_Question_User" FromRole="User" ToRole="Question" />
+    <Property Name="Ustate" Type="Int32" />
   </EntityType>
   <Association Name="FK_Appointment_Mediciner">
     <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="1" />

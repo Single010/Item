@@ -121,6 +121,12 @@
 @section scripts{
 
     <script type="text/javascript">
+       $("#exampleModal").on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var Cid = button.data('whateverl');
+            var modal = $(this);
+            modal.find('.modal-body input[name="Cid"]').val(Cid)
+       })
         $("#save").click(function () {
             $("#form1").submit();
         })

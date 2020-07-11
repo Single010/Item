@@ -30,7 +30,7 @@
     <div class="container">
         <div class="jsbg" style="margin-top:-15px;">
             <ul class="breadcrumb" style="background-color:#566374;">
-                <li><a href="#">人员管理</a></li>
+                <li><a href="">人员管理</a></li>
                 <li><a href="#">用户管理</a></li>
             </ul>
             <div class="col-lg-12 mxlength" style="border:5px dashed #516877;background-color:white;height:600px;position:relative;">
@@ -53,21 +53,31 @@
                             <th>身份证号</th>
                             <th>手机号</th>
                             @*<th>修改</th>*@
-                            <th>删除</th>
+                            <th>冻结</th>
                         </tr>
                     </thead>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@item.Uid</td>
-                            <td>@item.Uloginname</td>
-                            <td>@item.Uname</td>
-                            <td>@item.Gender</td>
-                            <td>@item.Uidentity</td>
-                            <td>@item.Mobile</td>
-                            @*<td><a href="/Department/Edit/@item.Uid" class="btn btn-info">修改</a></td>*@
-                            <td><a href="/Department/Delete/@item.Uid" class="btn btn-danger" onclick="return confirm('您确定要删除 @item.Uname 的信息吗？')">删除</a></td>
-                        </tr>
+                <tr>
+                    <td>@item.Uid</td>
+                    <td>@item.Uloginname</td>
+                    <td>@item.Uname</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Uidentity</td>
+                    <td>@item.Mobile</td>
+                    @*<td><a href="/Department/Edit/@item.Uid" class="btn btn-info">修改</a></td>*@
+                    <td>
+                        @if (item.Ustate == 0 || item.Ustate==null)
+                        {
+                            <a href="/Adimin/Delete/@item.Uid" class="btn btn-danger" onclick="return confirm('您确定要冻结 @item.Uname 的账号吗？')">冻结</a>
+
+                        }
+                        else
+                        {
+                            <a href="/Adimin/Frindom/@item.Uid" class="btn btn-info" onclick="return confirm('您确定要解冻 @item.Uname 的账号吗？')">解冻</a>
+                        }
+                    </td>
+                </tr>
                     }
                 </table>
                 @*分页*@

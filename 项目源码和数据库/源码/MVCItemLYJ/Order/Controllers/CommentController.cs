@@ -26,7 +26,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Comment> com = db.Comment.OrderBy(p => p.Cid)
+            List<Comment> com = db.Comment.OrderByDescending(p => p.Cid)
                  .Where(p => p.Uid == user.Uid).ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -53,6 +53,28 @@ namespace Order.Controllers
             return RedirectToAction("UserComment", "Comment");
         }
 
+        /// <summary>
+        /// 修改评论
+        /// </summary>
+        /// <param name="Cid"></param>
+        /// <param name="Comments"></param>
+        /// <returns></returns>
+        public ActionResult EditCom(int Cid,string Comments)
+        {
+            Comment com = db.Comment.Find(Cid);
+            if (com.Cstate==0)
+            {
+                return Content("<script>alert('此预约还未评论，不能修改！');history.go(-1)</script>");
+            }
+            else
+            {
+                com.Ctime = DateTime.Now;
+                com.Comments = Comments;
+                db.SaveChanges();
+                return RedirectToAction("UserComment", "Comment");
+            }
+           
+        }
 
         /// <summary>
         /// 删除评论

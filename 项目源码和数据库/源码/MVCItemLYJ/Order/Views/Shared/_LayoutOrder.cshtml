@@ -20,7 +20,7 @@
     <div class="gh-nav">
         <div class="container g-clear">
             <div class="g-left" id="">
-                @if (user == null && med == null)
+                @if (user == null)
                 {<span class="text">您好！ 请</span>
                     <a href="/Users/Logon">登录</a>
                     <span class="line">|</span>
@@ -28,41 +28,36 @@
                     <a href="/Mediciner/Create"><i></i>我是医生</a>
                     <a href="/Adimin/Login"><i></i>管理员</a>
                 }
-                else if (user != null && med == null)
+                else
                 {
                     <span class="text">@user.Uname 您好！</span>
                     <a href="/Users/Logout">退出</a>
                 }
-                else if (user == null && med != null)
-                {
-                    <span class="text">@med.Mname 您好！</span>
-                    <a href="/Mediciner/Logout">退出</a>
-                }
+
 
             </div>
 
 
             <div class="g-right">
 
-                <a href="text">
+                <a href="" class="im">
                     下载APP
-                    <span>
-                        <img src="https://static.guahao.cn/front/portal-pc-static/img/index-appQRcode.png?v=20170505" alt="" style="display: none;">
+                    <span style="position:relative">
+                        <img src="https://static.guahao.cn/front/portal-pc-static/img/index-appQRcode.png?v=20170505" alt="" style="display: none;position:absolute;z-index:20;" class="imagee">
                     </span>
                 </a>
                 <span class="line">|</span>
-                <a href="">快速取消预约</a>
+                <a href="/Users/MyOrder">快速取消预约</a>
                 <span class="line">|</span>
-                <a href="">客服中心</a>
+                <a href="" class="medc">客服中心</a>
                 <span class="line">|</span>
-                <a href="">微医云</a>
+                <a href="" class="medc">微医云</a>
                 <span class="line">|</span>
-                <a href="">药品信息</a>
+                <a href="" class="medc">药品信息</a>
             </div>
         </div>
     </div>
-    @if (user == null && med == null)
-    {
+  
         <div class="gh-main">
             <div class="container g-clear1" style="width: 1230px">
                 <div class="gh-logo ">
@@ -94,57 +89,7 @@
                 </ul>
             </div>
         </div>
-
-    }
-    else if (user != null && med == null)
-    {
-        <div class="gh-main">
-            <div class="container g-clear1" style="width: 1230px">
-                <div class="gh-logo ">
-                    <img src="~/Content/Images/标志.jpg" alt="微医" class="wy-logo" />
-                </div>
-                <div class="gh-search gh-web-search gh-search-left ">
-                    <form class="gh-search-form" action="~/Frist/FindHosName" name="qform">
-                        <span class="glyphicon glyphicon-search" style=" width: 90%; height: 30px; line-height: 30px;">
-                            <span class="search-icon"></span>
-                            <input type="text" name="name" value="" autocomplete="off" maxlength="50" class="J_SearchQ" placeholder="请输入医院名" style="width:90%; border:none;outline:none" />
-                        </span>
-                        <input type="submit" value="搜索" class="gbn gbt-green2" style="height:34px;width:50px;background-color:#6EB92C;border:none;outline:none;color:white;font-size:16px;" />
-                        <div class="clear"></div>
-                    </form>
-                </div>
-                <span class="gh-search-tips">
-                    <img src="~/Content/Images/品台.jpg" />
-                </span>
-            </div>
-        </div>
-        <div class="navigation">
-            <div class="home-menu-ctn">
-                <ul class="main-menu-nav">
-                    <li style="background-color:#2B73CC; width:73px;"><a href="" style="color:white;">帮你快速找医生</a></li>
-                    <li><a href="/Users/MyOrder">我的预约</a></li>
-                    <li><a href="/Comment/UserComment">我的评论</a></li>
-                    <li><a href="/Users/Question">我的问诊</a></li>
-                    <li><a href="/Users/MyMessage">我的信息</a></li>
-                </ul>
-            </div>
-        </div>
-
-    }
-    else if (user == null && med != null)
-    {
-        <div class="navigation">
-            <div class="home-menu-ctn">
-                <ul class="main-menu-nav">
-                    <li><a href="">我的预约</a></li>
-                    <li><a href="">我的评论</a></li>
-                    <li><a href="">我的问诊</a></li>
-                    <li><a href="">我的信息</a></li>
-                    <li><a href="">预约设置</a></li>
-                </ul>
-            </div>
-        </div>
-    }
+   
 
 
 

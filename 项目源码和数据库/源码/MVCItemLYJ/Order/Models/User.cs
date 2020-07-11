@@ -11,7 +11,8 @@ namespace Order.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,12 +24,18 @@ namespace Order.Models
         }
     
         public int Uid { get; set; }
+        [Required(ErrorMessage = "账号必需填写")]
         public string Uloginname { get; set; }
+        [Required(ErrorMessage = "密码必需填写")]
         public string Upwd { get; set; }
+        [Required(ErrorMessage = "姓名必需填写")]
         public string Uname { get; set; }
         public string Gender { get; set; }
+        [Required(ErrorMessage = "身份证必需填写")]
         public string Uidentity { get; set; }
+        [Required(ErrorMessage = "手机必需填写")]
         public string Mobile { get; set; }
+        public Nullable<int> Ustate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointment> Appointment { get; set; }

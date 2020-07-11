@@ -50,7 +50,7 @@
     <Property Name="Hname" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Grade" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="HImage" Type="nvarchar" MaxLength="50" />
+    <Property Name="HImage" Type="nvarchar" MaxLength="300" />
   </EntityType>
   <EntityType Name="Mediciner">
     <Key>
@@ -69,7 +69,8 @@
     <Property Name="Mcount" Type="int" Nullable="false" />
     <Property Name="Hid" Type="int" Nullable="false" />
     <Property Name="Did" Type="int" Nullable="false" />
-    <Property Name="MPic" Type="nvarchar" MaxLength="50" />
+    <Property Name="MPic" Type="nvarchar" MaxLength="300" />
+    <Property Name="Mstate" Type="int" />
   </EntityType>
   <EntityType Name="Question">
     <Key>
@@ -94,6 +95,7 @@
     <Property Name="Gender" Type="nvarchar" MaxLength="2" Nullable="false" />
     <Property Name="Uidentity" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Mobile" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="Ustate" Type="int" />
   </EntityType>
   <Association Name="FK_Appointment_Mediciner">
     <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="1" />
@@ -155,30 +157,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Mediciner_Dept">
-    <End Role="Dept" Type="Self.Dept" Multiplicity="1" />
-    <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Dept">
-        <PropertyRef Name="Did" />
-      </Principal>
-      <Dependent Role="Mediciner">
-        <PropertyRef Name="Did" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Mediciner_Hospital">
-    <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
-    <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Hospital">
-        <PropertyRef Name="Hid" />
-      </Principal>
-      <Dependent Role="Mediciner">
-        <PropertyRef Name="Hid" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Question_Mediciner">
     <End Role="Mediciner" Type="Self.Mediciner" Multiplicity="1" />
     <End Role="Question" Type="Self.Question" Multiplicity="*" />
@@ -231,14 +209,6 @@
     <AssociationSet Name="FK_Dept_Dept1" Association="Self.FK_Dept_Dept1">
       <End Role="Dept" EntitySet="Dept" />
       <End Role="Dept1" EntitySet="Dept" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Mediciner_Dept" Association="Self.FK_Mediciner_Dept">
-      <End Role="Dept" EntitySet="Dept" />
-      <End Role="Mediciner" EntitySet="Mediciner" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Mediciner_Hospital" Association="Self.FK_Mediciner_Hospital">
-      <End Role="Hospital" EntitySet="Hospital" />
-      <End Role="Mediciner" EntitySet="Mediciner" />
     </AssociationSet>
     <AssociationSet Name="FK_Question_Mediciner" Association="Self.FK_Question_Mediciner">
       <End Role="Mediciner" EntitySet="Mediciner" />

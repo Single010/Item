@@ -5,9 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Order.Models;
+using Order.Filter;
 
 namespace Order.Controllers
 {
+    
     public class AdiminController : Controller
     {
         AppointmentsEntities db = new AppointmentsEntities();
@@ -36,11 +38,13 @@ namespace Order.Controllers
             return View();
         }
 
+        [Adimin]
         public ActionResult Main()
         {
             return View();
         }
 
+        [Adimin]
         /// <summary>
         /// 首页
         /// </summary>
@@ -51,6 +55,7 @@ namespace Order.Controllers
         }
 
 
+        [Adimin]
         /// <summary>
         /// 用户管理
         /// </summary>
@@ -64,7 +69,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<User> use = db.User.OrderBy(p => p.Uid)
+            List<User> use = db.User.OrderByDescending(p => p.Uid)
                  .Where(p => p.Uname.Contains(Nmae) || Nmae == "").ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -74,6 +79,36 @@ namespace Order.Controllers
             return View(use);
         }
 
+
+        [Adimin]
+        /// <summary>
+        /// 冻结账号
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Delete(int? id)
+        {
+            User sue = db.User.Find(id);
+            sue.Ustate = 1;
+            db.SaveChanges();
+            return RedirectToAction("UserH");
+        }
+
+        [Adimin]
+        /// <summary>
+        /// 解冻
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Frindom(int? id)
+        {
+            User sue = db.User.Find(id);
+            sue.Ustate = 0;
+            db.SaveChanges();
+            return RedirectToAction("UserH");
+        }
+
+
+        [Adimin]
         /// <summary>
         /// 医生管理
         /// </summary>
@@ -88,7 +123,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得医生集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Mediciner> medc = db.Mediciner.OrderBy(p => p.Mid)
+            List<Mediciner> medc = db.Mediciner.OrderByDescending(p => p.Mid)
                  .Where(p => p.Mname.Contains(Nmae) || Nmae == "").ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -98,19 +133,34 @@ namespace Order.Controllers
             return View(medc);
         }
 
+        [Adimin]
         /// <summary>
-        /// 删除医生
+        /// 冻结医生账号
         /// </summary>
         /// <returns></returns>
         public ActionResult DeleteMedc(int id)
         {
             Mediciner med = db.Mediciner.Find(id);
-            db.Mediciner.Remove(med);
+            med.Mstate = 1;
             db.SaveChanges();
-
             return RedirectToAction("MedcH", "Adimin");
         }
 
+        /// <summary>
+        /// 医生账号解冻
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult FrindomMedc(int id)
+        {
+            Mediciner med = db.Mediciner.Find(id);
+            med.Mstate = 0;
+            db.SaveChanges();
+            return RedirectToAction("MedcH", "Adimin");
+        }
+
+
+        [Adimin]
         /// <summary>
         /// 管理员
         /// </summary>
@@ -124,7 +174,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得医生集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Adimin> adi = db.Adimin.OrderBy(p => p.Aid)
+            List<Adimin> adi = db.Adimin.OrderByDescending(p => p.Aid)
                  .Where(p => p.ANmae.Contains(Nmae) || Nmae == "").ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -133,6 +183,8 @@ namespace Order.Controllers
             ViewBag.totalPage = totalPage;
             return View(adi);
         }
+
+        [Adimin]
         /// <summary>
         /// 添加管理员
         /// </summary>
@@ -141,11 +193,20 @@ namespace Order.Controllers
         [HttpPost]
         public ActionResult AddAdim(Adimin adim)
         {
-            db.Adimin.Add(adim);
-            db.SaveChanges();
-            return RedirectToAction("AdimH", "Adimin");
+            if (adim.ANmae==null || adim.Aloginname==null || adim.Apwd==null)
+            {
+                return Content("<script>alert('输入不能为空');history.go(-1)</script>");
+            }
+            else
+            {
+                db.Adimin.Add(adim);
+                db.SaveChanges();
+                return RedirectToAction("AdimH","Adimin");
+            }
+            
         }
 
+        [Adimin]
         /// <summary>
         /// 删除管理员
         /// </summary>
@@ -159,6 +220,7 @@ namespace Order.Controllers
             return RedirectToAction("AdimH", "Adimin");
         }
 
+        [Adimin]
         /// <summary>
         /// 修改管理员
         /// </summary>
@@ -171,7 +233,7 @@ namespace Order.Controllers
         }
 
 
-
+        [Adimin]
         /// <summary>
         /// 医院管理
         /// </summary>
@@ -186,7 +248,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得医院集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Hospital> hos = db.Hospital.OrderBy(p => p.Hid)
+            List<Hospital> hos = db.Hospital.OrderByDescending(p => p.Hid)
                  .Where(p => p.Hname.Contains(Nmae) || Nmae == "").ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -197,6 +259,8 @@ namespace Order.Controllers
             return View(hos);
         }
 
+
+        [Adimin]
         /// <summary>
         /// 添加医院
         /// </summary>
@@ -244,6 +308,8 @@ namespace Order.Controllers
            
         }
 
+
+        [Adimin]
         /// <summary>
         /// 修改医院
         /// </summary>
@@ -255,6 +321,9 @@ namespace Order.Controllers
             ViewBag.hos = hos;
             return View(hos);
         }
+
+
+        [Adimin]
         [HttpPost]
         /// <summary>
         /// 修改医院信息
@@ -282,6 +351,7 @@ namespace Order.Controllers
             return RedirectToAction("HospitalH", "Adimin");
         }
 
+        [Adimin]
         /// <summary>
         /// 删除医院
         /// </summary>
@@ -290,12 +360,22 @@ namespace Order.Controllers
         public ActionResult DeleteHos(int id)
         {
             Hospital hos = db.Hospital.Find(id);
-            db.Hospital.Remove(hos);
-            db.SaveChanges();
-            return RedirectToAction("HospitalH", "Adimin");
+            List<Mediciner> dept = db.Mediciner.Where(p => p.Hid == id).ToList();
+            if (dept.Count()==0)
+            {
+                db.Hospital.Remove(hos);
+                db.SaveChanges();
+                return RedirectToAction("HospitalH", "Adimin");
+            }
+            else
+            {
+                return Content("<script>alert('此医院内还有在岗医生，不能删除！'); history.go(-1)</script>");
+            }
+           
         }
 
 
+        [Adimin]
         /// <summary>
         /// 一级科室
         /// </summary>
@@ -307,7 +387,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得医院集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Dept> dept = db.Dept.OrderBy(p => p.Did)
+            List<Dept> dept = db.Dept.OrderByDescending(p => p.Did)
                  .Where(p => (p.Dname.Contains(Nmae) || Nmae == "")&&(p.Pdid == null)).ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -319,6 +399,7 @@ namespace Order.Controllers
         }
 
 
+        [Adimin]
         /// <summary>
         /// 添加一级科室
         /// </summary>
@@ -327,11 +408,19 @@ namespace Order.Controllers
         [HttpPost]
         public ActionResult AddFristDept(Dept dept)
         {
-            db.Dept.Add(dept);
-            db.SaveChanges();
-            return RedirectToAction("FristDept", "Adimin");
+            if (dept.Dname==null || dept.Dspec==null)
+            {
+                return Content("<script>alert('输入不能为空');history.go(-1)</script>");
+            }
+            else
+            {
+                db.Dept.Add(dept);
+                db.SaveChanges();
+                return RedirectToAction("FristDept", "Adimin");
+            }
         }
 
+        [Adimin]
         /// <summary>
         /// 修改一级科室
         /// </summary>
@@ -343,6 +432,8 @@ namespace Order.Controllers
             return View(dept);
         }
 
+
+        [Adimin]
         [HttpPost]
         public ActionResult EditFristDept(Dept dept)
         {
@@ -353,6 +444,8 @@ namespace Order.Controllers
         }
 
 
+
+        [Adimin]
         /// <summary>
         /// 删除一级科室
         /// </summary>
@@ -376,6 +469,8 @@ namespace Order.Controllers
 
 
 
+
+        [Adimin]
         /// <summary>
         /// 二级科室
         /// </summary>
@@ -390,7 +485,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得医院集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Dept> dept = db.Dept.OrderBy(p => p.Did)
+            List<Dept> dept = db.Dept.OrderByDescending(p => p.Did)
                  .Where(p => (p.Dname.Contains(Nmae) || Nmae == "") && (p.Pdid != null)).ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             List<Dept> dept2 = db.Dept.ToList();
@@ -403,6 +498,7 @@ namespace Order.Controllers
             return View(dept);
         }
 
+        [Adimin]
         /// <summary>
         /// 添加二级科室
         /// </summary>
@@ -410,12 +506,21 @@ namespace Order.Controllers
         /// <returns></returns>
         public ActionResult AddTwoDept(Dept dept)
         {
-            db.Dept.Add(dept);
-            db.SaveChanges();
-            return RedirectToAction("TwoDept", "Adimin");
+            if (dept.Dname==null || dept.Dspec==null)
+            {
+                return Content("<script>alert('输入不能为空');history.go(-1)</script>");
+            }
+            else
+            {
+                db.Dept.Add(dept);
+                db.SaveChanges();
+                return RedirectToAction("TwoDept", "Adimin");
+            }
+           
         }
 
 
+        [Adimin]
         /// <summary>
         /// 删除二级科室
         /// </summary>
@@ -437,6 +542,8 @@ namespace Order.Controllers
             }
         }
 
+
+        [Adimin]
         /// <summary>
         /// 修改二级科室
         /// </summary>
@@ -450,6 +557,8 @@ namespace Order.Controllers
             return View(dept);
         }
 
+
+        [Adimin]
         [HttpPost]
         public ActionResult EditTwoDept(Dept dept)
         {
@@ -458,8 +567,41 @@ namespace Order.Controllers
             return RedirectToAction("TwoDept","Adimin");
         }
 
+
+        [Adimin]
+        /// <summary>
+        /// 医院地区分部
+        /// </summary>
+        /// <returns></returns>
         public ActionResult TC()
         {
+            List< Hospital > hos = db.Hospital.ToList();
+            ViewBag.hos = hos;
+            return View();
+        }
+
+
+        [Adimin]
+        /// <summary>
+        /// 医生等级分部
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult TCMed()
+        {
+            List<Mediciner> med = db.Mediciner.ToList();
+            ViewBag.med = med;
+            return View();
+        }
+
+        [Adimin]
+        /// <summary>
+        ///用户统计
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult TCUser()
+        {
+            List<User> user = db.User.ToList();
+            ViewBag.user = user;
             return View();
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Order.Models;
+using Order.Filter;
 
 namespace Order.Controllers
 {
@@ -49,10 +50,7 @@ namespace Order.Controllers
             }
             else
             {
-                List<Dept> dept = db.Dept.Where(p => p.Pdid.ToString() != "").ToList();
-                List<Hospital> hos = db.Hospital.ToList();
-                ViewBag.hos = hos;
-                return View(dept);
+                return Content("<script>alert('注册失败！');history.go(-1)</script>");
             }
         }
         /// <summary>
@@ -69,10 +67,17 @@ namespace Order.Controllers
             Mediciner med = db.Mediciner.Where(p => p.Mloginname == Mloginname && p.Mpwd == Mpwd).SingleOrDefault();
             if (med != null)
             {
-                //将当前登录的医生信息存储到Session中
-                Session["med"] = med;
-                ViewBag.Erro = "";
-                return RedirectToAction("MedIndex", "Mediciner");
+                if (med.Mstate==0 || med.Mstate==null)
+                {
+                    //将当前登录的医生信息存储到Session中
+                    Session["med"] = med;
+                    ViewBag.Erro = "";
+                    return RedirectToAction("MedIndex", "Mediciner");
+                }
+                else
+                {
+                    return Content("<script>alert('抱歉，你的账号已被冻结！'); history.go(-1)</script>");
+                }
             }
             else
             {
@@ -87,11 +92,12 @@ namespace Order.Controllers
         /// <returns></returns>
         public ActionResult Logout()
         {
-            Session["user"] = null;
             Session["med"] = null;
             return RedirectToAction("Main", "Frist");
         }
 
+
+        [MedLogin]
         /// <summary>
         /// 医生的数据主页
         /// </summary>
@@ -102,6 +108,7 @@ namespace Order.Controllers
         }
 
 
+        [MedLogin]
         /// <summary>
         /// 我的信息
         /// </summary>
@@ -116,6 +123,8 @@ namespace Order.Controllers
             ViewBag.dep = dep;
             return View(med);
         }
+
+        [MedLogin]
         /// <summary>
         /// 修改我的信息
         /// </summary>
@@ -129,7 +138,9 @@ namespace Order.Controllers
             ViewBag.dep = dep;
             return View(med);
         }
-        
+
+
+        [MedLogin]
         [HttpPost]
         public ActionResult MedMessage(Mediciner med,HttpPostedFileBase file, string photo)
         {
@@ -165,19 +176,21 @@ namespace Order.Controllers
             return RedirectToAction("MedMessageEdit","Mediciner",new { id=med2.Mid});
         }
 
-
+        [MedLogin]
         public ActionResult Ords(int? id)
         {
             Mediciner med = db.Mediciner.Find(id);
             return View(med);
         }
 
-
+        [MedLogin]
         public ActionResult Ord(int? id)
         {
             Mediciner med = db.Mediciner.Find(id);
             return View(med);
         }
+
+        [MedLogin]
         [HttpPost]
         public ActionResult Ord(Mediciner med)
         {
@@ -206,6 +219,7 @@ namespace Order.Controllers
             return RedirectToAction("Ords", "Mediciner", new { id = med2.Mid });
         }
 
+        [MedLogin]
         /// <summary>
         /// 医生：我的预约
         /// </summary>
@@ -218,7 +232,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Appointment> app = db.Appointment.OrderBy(p => p.Aid)
+            List<Appointment> app = db.Appointment.OrderByDescending(p => p.Aid)
                  .Where(p => p.Mid == med.Mid).ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -252,6 +266,9 @@ namespace Order.Controllers
             return RedirectToAction("MyOrd", "Mediciner");
         }
 
+
+
+        [MedLogin]
         /// <summary>
         /// 医生：我的评论
         /// </summary>
@@ -266,7 +283,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Comment> com = db.Comment.OrderBy(p => p.Cid)
+            List<Comment> com = db.Comment.OrderByDescending(p => p.Cid)
                  .Where(p => p.Mid == med.Mid).ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -276,6 +293,9 @@ namespace Order.Controllers
             ViewBag.com = com;
             return View();
         }
+
+
+        [MedLogin]
 
         /// <summary>
         /// 医生：我的问诊
@@ -291,7 +311,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Question> ques = db.Question.OrderBy(p => p.Qid)
+            List<Question> ques = db.Question.OrderByDescending(p => p.Qid)
                  .Where(p => p.Mid == med.Mid).ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -302,6 +322,8 @@ namespace Order.Controllers
             return View();
         }
 
+
+        [MedLogin]
         /// <summary>
         /// 问诊回复
         /// </summary>
@@ -318,6 +340,30 @@ namespace Order.Controllers
 
 
 
-       
+        [MedLogin]
+        /// <summary>
+        /// 修改问诊回复
+        /// </summary>
+        /// <param name="Qid"></param>
+        /// <param name="Qanswer"></param>
+        /// <returns></returns>
+        public ActionResult EditQuesAnswer(int Qid,string Qanswer)
+        {
+            Question ques = db.Question.Find(Qid);
+            if (ques.Qstate==0)
+            {
+                return Content("<script>alert('此问诊还未回复，不能修改！');history.go(-1)</script>");
+            }
+            else
+            {
+
+                ques.Qanswer = Qanswer;
+                db.SaveChanges();
+                return RedirectToAction("Ques", "Mediciner");
+            }
+        }
+
+
+
     }
 }

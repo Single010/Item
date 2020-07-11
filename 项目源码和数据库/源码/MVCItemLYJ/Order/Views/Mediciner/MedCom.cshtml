@@ -36,6 +36,7 @@
                 <th>评论时间</th>
                 <th>内容</th>
                 <th>状态</th>
+                <th>详情</th>
             </tr>
         </thead>
         @foreach (var item in com)
@@ -54,7 +55,7 @@
                 {
                     <td style="color:forestgreen">已评论</td>
                 }
-
+                <td><a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModa3" data-whatever="@item.User.Uname" data-whatever1="@item.Aid" data-whatever2="@item.Ctime" data-whatever3="@item.Comments">详情</a></td>
             </tr>
         }
     </table>
@@ -119,3 +120,61 @@
 
 </div>@*分页尾*@
 
+@*评论详情*@
+<div class="modal fade" id="exampleModa3" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">评论详情</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="form3">
+                    <div class="form-group">
+                        <input type="hidden" readonly="readonly" class="form-control .modal-body" id="Cid" name="Cid">
+                    </div>
+                    <div class="form-group">
+                        <label for="Uname" class="col-form-label">预约用户:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="Uname" name="Uname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Aid" class="col-form-label">预约ID:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="Aid" name="Aid">
+                    </div>
+                    <div class="form-group">
+                        <label for="Ctime" class="col-form-label">评论时间:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="Ctime" name="Ctime">
+                    </div>
+                    <div class="form-group">
+                        <label for="Comments" class="col-form-label">评论内容:</label>
+                        <textarea class="form-control" readonly="readonly" id="Comments" name="Comments"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $("#exampleModa3").on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var Uname = button.data('whatever');
+            var Aid = button.data('whatever1');
+            var Ctime = button.data('whatever2');
+            var Comments = button.data('whatever3');
+            var modal = $(this);
+            modal.find('.modal-body input[name="Uname"]').val(Uname)
+            modal.find('.modal-body input[name="Aid"]').val(Aid)
+            modal.find('.modal-body input[name="Ctime"]').val(Ctime)
+            modal.find('.modal-body textarea[name="Comments"]').val(Comments)
+        })
+    </script>
+}

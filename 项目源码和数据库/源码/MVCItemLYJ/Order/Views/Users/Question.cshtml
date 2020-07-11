@@ -32,26 +32,28 @@
                 <th>回答</th>
                 <th>状态</th>
                 <th>操作</th>
+                <td>详情</td>
             </tr>
         </thead>
         @foreach (var item in ques)
         {
-    <tr>
-        <td>@item.Qid</td>
-        <td>@item.Mediciner.Mname</td>
-        <td>@item.Qtime</td>
-        <td>@item.Qcontent</td>
-        <td>@item.Qanswer</td>
-        @if (item.Qstate == 0)
-        {
-            <td style="color:red">未回答</td>
-        }
-        else
-        {
-            <td style="color:forestgreen">已回答</td>
-        }
-        <td><a href="/Users/DeleteQues/@item.Qid" class="btn btn-danger" onclick="return confirm('您确定要删除 @item.Mediciner.Mname 大夫的问诊信息吗？')">删除</a></td>
-    </tr>
+            <tr>
+                <td>@item.Qid</td>
+                <td>@item.Mediciner.Mname</td>
+                <td>@item.Qtime</td>
+                <td>@item.Qcontent</td>
+                <td>@item.Qanswer</td>
+                @if (item.Qstate == 0)
+                {
+                    <td style="color:red">未回答</td>
+                }
+                else
+                {
+                    <td style="color:forestgreen">已回答</td>
+                }
+                <td><a href="/Users/DeleteQues/@item.Qid" class="btn btn-danger" onclick="return confirm('您确定要删除 @item.Mediciner.Mname 大夫的问诊信息吗？')">删除</a></td>
+                <td><a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@item.Mediciner.Mname" data-whatever1="@item.Qtime" data-whatever2="@item.Qcontent" data-whatever3="@item.Qanswer">详情</a></td>
+            </tr>
         }
     </table>
 </div>
@@ -66,7 +68,7 @@
             <label style="color:black;">总共 @ViewBag.totalCount 行</label>
             <select onchange="window.location = this.value;">
                 @{
-                    int[] count = new[] { 2, 3,4, 5 };
+                    int[] count = new[] { 2, 3, 4, 5 };
                 }
                 @foreach (var item in count)
                 {
@@ -115,3 +117,56 @@
 
 </div>@*分页尾*@
 
+@*详情信息*@
+<div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">问诊详情信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="form1">
+                    <div class="form-group">
+                        <label for="Mname" class="col-form-label">医生名:</label>
+                        <input type="text" readonly="readonly"  class="form-control" id="Mname" name="Mname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Qtime" class="col-form-label">时间:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="Qtime" name="Qtime">
+                    </div>
+                    <div class="form-group">
+                        <label for="Qcontent" class="col-form-label">提问:</label>
+                        <textarea readonly="readonly" class="form-control" id="Qcontent" name="Qcontent"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Qanswer" class="col-form-label">回答:</label>
+                        <textarea readonly="readonly" class="form-control" id="Qanswer" name="Qanswer"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $("#exampleModal").on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var Mname = button.data('whatever');
+            var Qtime = button.data('whatever1');
+            var Qcontent = button.data('whatever2');
+            var Qanswer = button.data('whatever3');
+            var modal = $(this);
+            modal.find('.modal-body input[name="Mname"]').val(Mname)
+            modal.find('.modal-body input[name="Qtime"]').val(Qtime)
+            modal.find('.modal-body textarea[name="Qcontent"]').val(Qcontent)
+            modal.find('.modal-body textarea[name="Qanswer"]').val(Qanswer)
+        })
+    </script>
+}

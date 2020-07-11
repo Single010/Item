@@ -42,14 +42,14 @@
         <td>@item.Ttime</td>
         @if (item.Astate == 0)
         {
-            <td style="color:green">未开始</td>
+            <td style="color:green">未结束</td>
         }
         else
         {
             <td style="color:red">已结束</td>
         }
         <td>@item.Anun</td>
-        <td><a href="/Users/DeleteApp/@item.Aid" class="btn btn-danger" onclick="return confirm('您确定要删除 @item.Mediciner.Mname 大夫的预约信息吗？')">删除</a></td>
+        <td><a href="/Users/DeleteApp/@item.Aid" class="btn btn-danger" onclick="return confirm('您确定要取消 @item.Mediciner.Mname 大夫的预约信息吗？')">取消</a></td>
     </tr>
         }
     </table>

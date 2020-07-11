@@ -21,21 +21,23 @@
 }
 <body>
     <div id="loading">
-        <div></div>
+        <div ></div>
         <div></div>
         <span></span>
     </div>
     <!-- WRAPPER -->
     <div id="wrapper">
         <!-- NAVBAR -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="brand"> <a href="~/新建文件夹/index.html"><img src="~/新建文件夹/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a> </div>
+        <nav class="navbar navbar-default navbar-fixed-top" style="height:77px;">
+            <div class="brand" style="position:relative;"><a href="~/新建文件夹/index.html">
+    <img src="~/Content/Images/标志后台.jpg" style="position:absolute;top:0;height:76px;left:15px;"/>@*<img src="~/新建文件夹/" alt="Klorofil Logo" class="img-responsive logo">*@
+</a> </div>
             <div class="container-fluid" style="position:relative;">
-                <div class="navbar-btn" style="padding: 0; padding-top: 10px;">
-                    <button type="button" class="btn-toggle-fullwidth btn-toggle-mx"><img src="~/新建文件夹/img/left.png" height="40px" alt=""></button>
+                <div class="navbar-btn" style="padding: 0; padding-top: 10px;" >
+                    <button type="button" class="btn-toggle-fullwidth btn-toggle-mx" style="position:absolute;left:200px;"><img src="~/新建文件夹/img/left.png" height="40px" alt=""></button>
                 </div>
                 <div style="color:white;font-size:30px;position:absolute;top:20px;left:600px;">快医预约后台管理系统</div>
-                <div style="color:white;position:absolute;top:30px;left:1250px;">欢迎你：ss@*@adi.ANmae*@</div>
+                <div style="color:white;position:absolute;top:30px;left:1250px;">欢迎你：@adi.ANmae</div>
                 <a href="/Adimin/Logout" style="color:white;position:absolute;top:30px;left:1450px;">退出</a>
             </div>
         </nav>
@@ -61,7 +63,7 @@
                         </li>
 
                         <li>
-                            <a href="javascript:;"class="nav-togg"> <span>医院</span> </a>
+                            <a href="javascript:;" class="nav-togg"> <span>医院</span> </a>
                             <div>
                                 <ul>
                                     <li><a href="~/Adimin/HospitalH/" target="_blank" class="iframe_link"><span>医院管理</span></a></li>
@@ -75,6 +77,16 @@
                                 <ul>
                                     <li><a href="~/Adimin/FristDept/" target="_blank" class="iframe_link"><span>一级科室</span></a></li>
                                     <li><a href="~/Adimin/TwoDept/" target="_blank" class="iframe_link"><span>二级科室</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="nav-togg"> <span>统计</span> </a>
+                            <div>
+                                <ul>
+                                    <li><a href="~/Adimin/TC/" target="_blank" class="iframe_link"><span>医院分部</span></a></li>
+                                    <li><a href="~/Adimin/TCMed/" target="_blank" class="iframe_link"><span>医生信息</span></a></li>
+                                    <li><a href="~/Adimin/TCUser/" target="_blank" class="iframe_link"><span>用户信息</span></a></li>
                                 </ul>
                             </div>
                         </li>

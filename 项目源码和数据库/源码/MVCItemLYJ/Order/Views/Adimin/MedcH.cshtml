@@ -81,7 +81,16 @@
                                 }
                             </td>
                             @*<td><a href="/Department/Edit/@item.Mid" class="btn btn-info">修改</a></td>*@
-                            <td><a href="/Adimin/DeleteMedc/@item.Mid" class="btn btn-danger" onclick="return confirm('您确定要删除 @item.Mname 的信息吗？')">删除</a></td>
+                        <td>
+                            @if (item.Mstate == 0 || item.Mstate==null)
+                            {
+                                <a href="/Adimin/DeleteMedc/@item.Mid" class="btn btn-danger" onclick="return confirm('您确定要冻结 @item.Mname 的账号吗？')">冻结</a>
+                            }
+                            else
+                            {
+                                <a href="/Adimin/FrindomMedc/@item.Mid" class="btn btn-info" onclick="return confirm('您确定要解冻 @item.Mname 的账号吗？')">解冻</a>
+                            }
+                        </td>
                         </tr>
                     }
                 </table>

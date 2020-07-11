@@ -49,29 +49,29 @@
                             <img src="~/Content/Images/医院1.jpg" style="height:350px;width:810px;" />
                             <!--添加对应标题和内容-->
                             <div class="carousel-caption">
-                                <h4>图一</h4>
-                                <span>内容</span>
+                                <h4>南华附属第一医院</h4>
+                                @*<span>内容</span>*@
                             </div>
                         </div>
                         <div class="item">
                             <img src="~/Content/Images/医院2.jpg" style="height:350px;width:810px;" />
                             <!--添加对应标题和内容-->
                             <div class="carousel-caption">
-                                <h4>图二</h4>
+                                <h4>武警医院</h4>
                             </div>
                         </div>
                         <div class="item">
                             <img src="~/Content/Images/医院3.jpg" style="height:350px;width:810px;" />
                             <!--添加对应标题和内容-->
                             <div class="carousel-caption">
-                                <h4>图三</h4>
+                                <h4>北京第一人民医院</h4>
                             </div>
                         </div>
                         <div class="item">
                             <img src="~/Content/Images/医院4.jpg" style="height:350px;width:810px;" />
                             <!--添加对应标题和内容-->
                             <div class="carousel-caption">
-                                <h4>图四</h4>
+                                <h4>169军事医院</h4>
                             </div>
                         </div>
                         <!--计数器-->
@@ -123,7 +123,7 @@
                 @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneDept" })
             </li>
         }
-        @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Skip(1))
+        @foreach (var item in dept.Where(p => p.Pdid.ToString() != "" || p.Pdid != null).Take(15).Skip(1))
         {
             <li flag="selected">
                 @Ajax.ActionLink(@item.Dname, "FindMed", "Frist", new { id = item.Did, name = 2 }, new AjaxOptions { UpdateTargetId = "change", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
@@ -131,7 +131,7 @@
             </li>
         }
         <li flag="selected">
-            @*<a href="/Frist/More">更多科室>></a>*@
+            <a href="/Frist/More">更多科室>></a>
         </li>
     </ul>
     <div id="myTabContent" class="tab-content table-bordered" style="border-top:none">
@@ -152,7 +152,7 @@
                 @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name = item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class = "oneAdds" })
             </li>
         }
-        @foreach (var item in hos.Select(s => new { s.Address }).Distinct().Skip(1))
+        @foreach (var item in hos.Select(s => new { s.Address }).Distinct().Take(7).Skip(1))
         {
             <li flag="selected">
                 @Ajax.ActionLink(@item.Address, "FindHos", "Frist", new { name = item.Address }, new AjaxOptions { UpdateTargetId = "change1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" })
@@ -178,7 +178,6 @@
             <li class="list-group-item">每位医生的预约时间不同</li>
             <li class="list-group-item">请提前预约</li>
         </ul>
-        <lable>已预约人数:</lable>
     </div>
 
 </div>
@@ -200,5 +199,17 @@
     </script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script type="text/javascript">
+        $(".im").hover(function () {
+            $(".imagee").show();
+        },
+            function () {
+                $(".imagee").hide();
+            })
+        $(".medc").click(function () {
+            alert('我们正在加速开发中......')
+        })
+    </script>
 
 }

@@ -135,7 +135,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MedicinerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Filter\AdiminAttribute.cs" />
     <Compile Include="Filter\LoginAttribute.cs" />
+    <Compile Include="Filter\MedLoginAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +207,7 @@
     <Content Include="Content\Images\品台.jpg" />
     <Content Include="Content\Images\拿着听诊器的医生图片_彼岸图网.jpg" />
     <Content Include="Content\Images\标志.jpg" />
+    <Content Include="Content\Images\标志后台.jpg" />
     <Content Include="Content\Images\用户背景.jpg" />
     <Content Include="Content\Images\用户背景1.jpg" />
     <Content Include="Content\Images\美丽雪山湖泊风景4k壁纸3840x2160_彼岸图网.jpg" />
@@ -226,6 +229,7 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\editor.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="后台主页\css\all.css" />
@@ -342,6 +346,8 @@
     <Content Include="Views\Frist\MoreHos.cshtml" />
     <Content Include="Views\Frist\HosMed.cshtml" />
     <Content Include="Views\Frist\FindHosName.cshtml" />
+    <Content Include="Views\Adimin\TCMed.cshtml" />
+    <Content Include="Views\Adimin\TCUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

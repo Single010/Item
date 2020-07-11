@@ -34,7 +34,7 @@ namespace Order.Controllers
                     {
                     db.User.Add(use);
                     db.SaveChanges();
-                    return Content("<script>alert('注册成功！');history.go(-1)</script>");
+                    return RedirectToAction("Logon");
                     }
                     else
                     {
@@ -50,7 +50,7 @@ namespace Order.Controllers
             }
             else
             {
-                return View();
+                return Content("<script>alert('注册失败！');history.go(-1)</script>");
             }
         }
 
@@ -63,18 +63,28 @@ namespace Order.Controllers
         public ActionResult Logon(string Uloginname, string Upwd)
         {
             User user = db.User.Where(p => p.Uloginname == Uloginname && p.Upwd == Upwd).SingleOrDefault();
-            if (user != null)
-            {
-                //将当前登录的学生信息存储到Session中
-                Session["user"] = user;
-                ViewBag.Erro = "";
-                return RedirectToAction("Main","Frist");
-            }
-            else
-            {
-                ViewBag.Erro = "你输入的账号或密码错误!!";
-            }
-            return View();
+           
+                if (user != null)
+                {
+                    if (user.Ustate==0 || user.Ustate==null)
+                    {
+                        //将当前登录的学生信息存储到Session中
+                        Session["user"] = user;
+                        ViewBag.Erro = "";
+                        return RedirectToAction("Main", "Frist");
+                    }
+                    else
+                    {
+                        return Content("<script>alert('抱歉，你的账号已被冻结！'); history.go(-1)</script>");
+                    }
+                    
+                }
+                else
+                {
+                    ViewBag.Erro = "你输入的账号或密码错误!!";
+                }
+                return View();
+            
         }
 
         /// <summary>
@@ -84,7 +94,6 @@ namespace Order.Controllers
         public ActionResult Logout()
         {
             Session["user"] = null;
-            Session["med"] = null;
             return RedirectToAction("Main","Frist");
         }
 
@@ -103,7 +112,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Appointment> app = db.Appointment.OrderBy(p => p.Aid)
+            List<Appointment> app = db.Appointment.OrderByDescending(p => p.Aid)
                  .Where(p => p.Uid == user.Uid).ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -115,16 +124,17 @@ namespace Order.Controllers
         }
 
         /// <summary>
-        /// 删除预约
+        /// 取消预约
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public ActionResult DeleteApp(int? id)
         {
             Appointment app = db.Appointment.Find(id);
-            if (app.Astate==0)
+            TimeSpan ts = Convert.ToDateTime(app.Atime) - Convert.ToDateTime(DateTime.Now);
+            if (ts.Days<1)
             {
-                return Content("<script>alert('预约还没结束不能删除！');history.go(-1)</script>");
+                return Content("<script>alert('预约时间即将到不能取消！');history.go(-1)</script>");
             }
             else
             {
@@ -149,7 +159,7 @@ namespace Order.Controllers
             //总页数
             double totalPage = Math.Ceiling((double)totalCount / pageCount);
             //获得用户集合 , 分页查询Skip（）跳过指定数量的集合 Take() 从过滤后返回的集合中再从第一行取出指定的行数
-            List<Question> ques = db.Question.OrderBy(p => p.Qid)
+            List<Question> ques = db.Question.OrderByDescending(p => p.Qid)
                  .Where(p => p.Uid == user.Uid).ToList()
                  .Skip((pageIndex - 1) * pageCount).Take(pageCount).ToList();
             ViewBag.pageIndex = pageIndex;
@@ -158,6 +168,20 @@ namespace Order.Controllers
             ViewBag.totalPage = totalPage;
             ViewBag.ques = ques;
             return View();
+        }
+
+
+
+        /// <summary>
+        /// 删除问诊
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DeleteQues(int? id)
+        {
+            Question que = db.Question.Find(id);
+            db.Question.Remove(que);
+            db.SaveChanges();
+            return RedirectToAction("Question");
         }
 
         [Login]

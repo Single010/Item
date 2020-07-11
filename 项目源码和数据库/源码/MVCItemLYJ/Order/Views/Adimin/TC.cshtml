@@ -1,1 +1,138 @@
 ﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/heightlength.css">
+    <link rel="stylesheet" href="../css/mxjs.css">
+    <script src="~/Scripts/editor.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @{
+        List<Hospital> hos = ViewBag.hos as List<Hospital>;
+    }
+    @{
+
+        int a = 0;
+        int b = 0;
+        int c = 0;
+        //int d = 0;
+        int e = 0;
+    }
+    <style type="text/css">
+        .breadcrumb li a {
+            color: white;
+        }
+    </style>
+</head>
+@using Order.Models;
+@model List<Dept>
+<body style="background-color:white;">
+
+    <div class="container">
+        <div class="jsbg" style="margin-top:-15px;">
+            <ul class="breadcrumb" style="background-color:#566374;">
+                <li><a href="#">统计</a></li>
+                <li><a href="#">地区分类</a></li>
+            </ul>
+            <div class="col-lg-12 mxlength" style="border:5px dashed #516877;background-color:white;height:600px;position:relative;">
+
+                <div style="margin-top:15px;display:flex;width:500px;position:relative">
+
+
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                    <div id="main" style="width:1000px;height:400px;position:absolute;left:100px;margin-left:-100px;margin-top:50px;">
+                    </div>
+
+                    <span style="display:none">
+                        @foreach (var item in hos)
+                        {
+                            if (item.Address == "衡阳市")
+                            {
+                                @(a++)
+                            }
+                            else if (item.Address == "长沙市")
+                            {
+                                @(b++)
+                            }
+                            else if (item.Address == "华东地区")
+                            {
+                                @(c++)
+                            }
+                            @*else if (item.NativePlace == "湖南郴州")
+                            {
+                                @(d++)
+                            }*@
+                            else
+                            {
+                                @(e++)
+                            }
+                        }
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+    <script src="../js/smoothscroll.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="../js/mking.js"></script>
+</body>
+</html>
+
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    myChart.setOption({
+
+        title: {
+            text: '根据地区分类信息',
+
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['衡阳市','长沙市','华东地区','其它']
+        },
+        series: [
+            {
+                name: '地区',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: [
+                    { value: @a, name: '衡阳市' },
+                    { value: @b, name: '长沙市' },
+                    { value: @c, name: '华东地区' },
+                    @*{ value: @d, name: '湖南郴州' },*@
+                    { value: @e, name: '其它' },
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    })
+</script>

@@ -36,6 +36,8 @@
                 <th>问诊内容</th>
                 <th>回答</th>
                 <th>状态</th>
+                <th>修改</th>
+                <th>详情</th>
             </tr>
         </thead>
         @foreach (var item in ques)
@@ -55,7 +57,8 @@
                 {
                     <td style="color:forestgreen">已回复</td>
                 }
-
+                <td><a href="" class="btn btn-info" data-toggle="modal" data-target="#exampleModa3" data-whatever="@item.Qid" data-whatever1="@item.Qcontent" data-whatever2="@item.Qanswer" >修改</a></td>
+                <td><a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModa2" data-whatever="@item.User.Uname" data-whatever1="@item.Qtime" data-whatever2="@item.Qcontent" data-whatever3="@item.Qanswer">详情</a></td>
             </tr>
         }
     </table>
@@ -154,7 +157,76 @@
     </div>
 </div>
 
+@*详情信息*@
+<div class="modal fade" id="exampleModa2" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">问诊详情信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="form1">
+                    <div class="form-group">
+                        <label for="Mname" class="col-form-label">医生名:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="Uname" name="Uname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Qtime" class="col-form-label">时间:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="Qtime" name="Qtime">
+                    </div>
+                    <div class="form-group">
+                        <label for="Qcontent" class="col-form-label">提问:</label>
+                        <textarea readonly="readonly" class="form-control" id="Qcontent" name="Qcontent"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Qanswer" class="col-form-label">回答:</label>
+                        <textarea readonly="readonly" class="form-control" id="Qanswer" name="Qanswer"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+@*修改问诊*@
+<div class="modal fade" id="exampleModa3" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">修改问诊</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Mediciner/EditQuesAnswer" method="post" id="form3">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control .modal-body" id="Qid" name="Qid">
+                    </div>
+                    <div class="form-group">
+                        <label for="Qcontent" class="col-form-label">问诊问题:</label>
+                        <input type="text" readonly="readonly" class="form-control .modal-body" id="Qcontent" name="Qcontent">
+                    </div>
+                    <div class="form-group">
+                        <label for="Qanswer" class="col-form-label">回复内容:</label>
+                        <input type="text" class="form-control" id="Qanswer" name="Qanswer">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" id="save3">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts{
 
@@ -169,9 +241,39 @@
             modal.find('.modal-body input[name="Qcontent"]').val(Qcontent)
         })
 
+
+        $("#exampleModa2").on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var Uname = button.data('whatever');
+            var Qtime = button.data('whatever1');
+            var Qcontent = button.data('whatever2');
+            var Qanswer = button.data('whatever3');
+            var modal = $(this);
+            modal.find('.modal-body input[name="Uname"]').val(Uname)
+            modal.find('.modal-body input[name="Qtime"]').val(Qtime)
+            modal.find('.modal-body textarea[name="Qcontent"]').val(Qcontent)
+            modal.find('.modal-body textarea[name="Qanswer"]').val(Qanswer)
+        })
+
+
+
+        $("#exampleModa3").on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var Qid = button.data('whatever');
+            var Qcontent = button.data('whatever1');
+            var Qanswer = button.data('whatever2');
+            var modal = $(this);
+            modal.find('.modal-body input[name="Qid"]').val(Qid)
+            modal.find('.modal-body input[name="Qcontent"]').val(Qcontent)
+            modal.find('.modal-body input[name="Qanswer"]').val(Qanswer)
+        })
+
         $("#save").click(function () {
-            alert('评论成功！');
+            alert('回复成功！');
             $("#form1").submit();
+        })
+         $("#save3").click(function () {
+            $("#form3").submit();
         })
     </script>
 }

@@ -38,6 +38,7 @@
                 <th>状态</th>
                 <th>修改</th>
                 <th>删除</th>
+                <th>详情</th>
             </tr>
         </thead>
         @foreach (var item in com)
@@ -58,10 +59,10 @@
                     <td style="color:forestgreen">已评论</td>
                 }
                 <td>
-                    <a href="" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1">修改</a>
+                    <a href="" class="btn btn-info" data-toggle="modal" data-target="#exampleModa2" data-whatever="@item.Comments" data-whatever1="@item.Cid">修改</a>
                 </td>
                 <td><a href="/Comment/DeleteCom/@item.Cid" class="btn btn-danger" onclick="return confirm('您确定要删除 @item.Mediciner.Mname 的这条品论吗？')">删除</a></td>
-
+                <td><a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModa3" data-whatever="@item.Mediciner.Mname" data-whatever1="@item.Aid" data-whatever2="@item.Ctime" data-whatever3="@item.Comments">详情</a></td>
             </tr>
         }
     </table>
@@ -139,7 +140,8 @@
             <div class="modal-body">
                 <form action="/Comment/AddCom" method="post" id="form1">
                     <div class="form-group">
-                        <input type="hidden" class="form-control .modal-body" id="Cid" name="Cid" >
+                        <label for="Comments" class="col-form-label">评论编号：</label>
+                        <input type="text" readonly="readonly" class="form-control .modal-body" id="Cid" name="Cid">
                     </div>
                     <div class="form-group">
                         <label for="Comments" class="col-form-label">评论内容:</label>
@@ -150,6 +152,76 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                 <button type="submit" class="btn btn-primary" id="save">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*修改评论*@
+<div class="modal fade" id="exampleModa2" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">修改评论</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Comment/EditCom" method="post" id="form2">
+                    <div class="form-group">
+                        <label for="Comments" class="col-form-label">评论编号：</label>
+                        <input type="text" readonly="readonly" class="form-control .modal-body" id="Cid" name="Cid">
+                    </div>
+                    <div class="form-group">
+                        <label for="Comments" class="col-form-label">评论内容:</label>
+                        <input type="text" class="form-control" id="Comments" name="Comments">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" id="save1">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*评论详情*@
+<div class="modal fade" id="exampleModa3" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">评论详情</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="form3">
+                    <div class="form-group">
+                        <input type="hidden" readonly="readonly" class="form-control .modal-body" id="Cid" name="Cid">
+                    </div>
+                    <div class="form-group">
+                        <label for="Mname" class="col-form-label">预约医生:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="Mname" name="Mname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Aid" class="col-form-label">预约ID:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="Aid" name="Aid">
+                    </div>
+                    <div class="form-group">
+                        <label for="Ctime" class="col-form-label">评论时间:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="Ctime" name="Ctime">
+                    </div>
+                    <div class="form-group">
+                        <label for="Comments" class="col-form-label">评论内容:</label>
+                        <textarea class="form-control" readonly="readonly" id="Comments" name="Comments"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
@@ -168,9 +240,33 @@
             modal.find('.modal-body input[name="Cid"]').val(Cid)
         })
 
+        $("#exampleModa2").on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var Comments = button.data('whatever');
+            var Cid = button.data('whatever1');
+            var modal = $(this);
+            modal.find('.modal-body input[name="Comments"]').val(Comments)
+            modal.find('.modal-body input[name="Cid"]').val(Cid)
+        })
+         $("#exampleModa3").on('show.bs.modal', function (e) {
+            var button = $(e.relatedTarget);
+            var Mname = button.data('whatever');
+             var Aid = button.data('whatever1');
+             var Ctime = button.data('whatever2');
+              var Comments = button.data('whatever3');
+            var modal = $(this);
+             modal.find('.modal-body input[name="Mname"]').val(Mname)
+             modal.find('.modal-body input[name="Aid"]').val(Aid)
+             modal.find('.modal-body input[name="Ctime"]').val(Ctime)
+             modal.find('.modal-body textarea[name="Comments"]').val(Comments)
+        })
+
         $("#save").click(function () {
             alert('评论成功！');
             $("#form1").submit();
+        })
+        $("#save1").click(function () {
+            $("#form2").submit();
         })
     </script>
 }

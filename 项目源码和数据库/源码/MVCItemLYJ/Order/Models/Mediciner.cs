@@ -11,7 +11,8 @@ namespace Order.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Mediciner
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,10 +24,14 @@ namespace Order.Models
         }
     
         public int Mid { get; set; }
+        [Required(ErrorMessage = "账号必需填写")]
         public string Mloginname { get; set; }
+        [Required(ErrorMessage = "密码必需填写")]
         public string Mpwd { get; set; }
+        [Required(ErrorMessage = "姓名必需填写")]
         public string Mname { get; set; }
         public string Gender { get; set; }
+        [Required(ErrorMessage = "介绍必需填写")]
         public string Titles { get; set; }
         public string Mspec { get; set; }
         public Nullable<System.DateTime> MtimeA { get; set; }
@@ -36,6 +41,7 @@ namespace Order.Models
         public int Hid { get; set; }
         public int Did { get; set; }
         public string MPic { get; set; }
+        public Nullable<int> Mstate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointment> Appointment { get; set; }
