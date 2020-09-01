@@ -149,7 +149,7 @@ namespace Order.Controllers
             {                //获取文件名
                 string fileName = Path.GetFileName(file.FileName);
                 //保存
-                file.SaveAs(Server.MapPath("~/Content/HosImage/" + file.FileName));
+                file.SaveAs(Server.MapPath("~/Content/Images/" + file.FileName));
                 //将文件名赋值给实体类照片属性
                 med.MPic = fileName;
             }

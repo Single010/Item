@@ -192,10 +192,13 @@
     <Content Include="Content\Images\one.png" />
     <Content Include="Content\Images\three.png" />
     <Content Include="Content\Images\two.png" />
+    <Content Include="Content\Images\《星球大战绝地：陨落的武士团（Star Wars Jedi_ Fallen Order）》4k游戏壁纸_彼岸图网.jpg" />
+    <Content Include="Content\Images\《赛博朋克Cyberpunk 2077》4k游戏壁纸_彼岸图网.jpg" />
     <Content Include="Content\Images\准备给病人做手术的医生图片_彼岸图网.jpg" />
     <Content Include="Content\Images\刚做完手术的医生图片_彼岸图网.jpg" />
     <Content Include="Content\Images\动画医生.jpg" />
     <Content Include="Content\Images\动画医生2.jpg" />
+    <Content Include="Content\Images\医生1.jpg" />
     <Content Include="Content\Images\医用工具图片_彼岸图网.jpg" />
     <Content Include="Content\Images\医院1.jpg" />
     <Content Include="Content\Images\医院2.jpg" />
@@ -204,13 +207,24 @@
     <Content Include="Content\Images\医院背景1.jpg" />
     <Content Include="Content\Images\医院背景2.jpg" />
     <Content Include="Content\Images\医院默认图.jpg" />
+    <Content Include="Content\Images\南华医院.jpg" />
     <Content Include="Content\Images\品台.jpg" />
+    <Content Include="Content\Images\城市 飞行的少女 二次元动漫壁纸_彼岸图网.jpg" />
+    <Content Include="Content\Images\女孩子 桌子 开水 雨天 玻璃窗 夜景 4k动漫壁纸_彼岸图网.jpg" />
     <Content Include="Content\Images\拿着听诊器的医生图片_彼岸图网.jpg" />
+    <Content Include="Content\Images\日落 天空 火车 云 电线 Χǽ 女孩 男孩 4k动漫壁纸_彼岸图网.jpg" />
     <Content Include="Content\Images\标志.jpg" />
     <Content Include="Content\Images\标志后台.jpg" />
+    <Content Include="Content\Images\温州附二.jpg" />
+    <Content Include="Content\Images\火车 列车 城市 插画 4k动漫壁纸_彼岸图网.jpg" />
     <Content Include="Content\Images\用户背景.jpg" />
     <Content Include="Content\Images\用户背景1.jpg" />
+    <Content Include="Content\Images\米奇老鼠 Mickey Mouse 4k壁纸_彼岸图网.jpg" />
     <Content Include="Content\Images\美丽雪山湖泊风景4k壁纸3840x2160_彼岸图网.jpg" />
+    <Content Include="Content\Images\美少女 科学 实验室 风景 场景 空间 二次元动漫4k壁纸_彼岸图网.jpg" />
+    <Content Include="Content\Images\英雄联盟女巫集会丽桑卓4k壁纸3840x2160_彼岸图网.jpg" />
+    <Content Include="Content\Images\车库 仓库 两个女生 记录 交流 4k动漫壁纸_彼岸图网.jpg" />
+    <Content Include="Content\Images\进击的巨人人物大全4k壁纸_彼岸图网.jpg" />
     <Content Include="Content\Images\默认.jpg" />
     <Content Include="Content\Main.css" />
     <Content Include="favicon.ico" />
@@ -262,6 +276,7 @@
     <Content Include="Models\Appointments.edmx.diagram">
       <DependentUpon>Appointments.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
